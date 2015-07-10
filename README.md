@@ -1,4 +1,4 @@
-# Web App Starter Kit for Fire TV
+# Web App for Fire TV
 -------------------
 
 Welcome! This is the source repository for the Web App Starter Kit for Fire TV, a getting started kit for creating a video or media focused web app for Fire TV.
