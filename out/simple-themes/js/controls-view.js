@@ -127,10 +127,19 @@
             this.$containerControls = $container.children().last();
             this.containerControls = $container.children().last()[0];
             this.playIcon = $container.find(".player-pause-button")[0];
+            this.contentImage = $container.find(".player-controls-content-image");
+            this.contentTitle = $container.find(".player-controls-content-title");
+            this.contentSubtitle = $container.find(".player-controls-content-subtitle");
+            var thumbURL = 'url('+data.thumbURL+')';
+            
+            this.contentImage.css('background-image', thumbURL);
+            this.contentTitle.text(data.title);
+            this.contentSubtitle.text(this.truncateSubtitle(data.description));
 
             this.$containerControls.find(".player-controls-content-title").text(data.title);
             this.$containerControls.find(".player-controls-content-subtitle").text(this.truncateSubtitle(data.description));
             this.seekHead = this.$containerControls.find(".player-controls-timeline-playhead")[0];
+            this.thumb = this.$containerControls.find(".player-controls-timeline-thumb")[0];
             this.$currSeekTime = this.$containerControls.find(".player-controls-timestamp-curtime");
             this.$forwardIndicator = this.$containerControls.find("#forward-indicator");
             this.$rewindIndicator = this.$containerControls.find("#rewind-indicator");
@@ -276,6 +285,7 @@
             // Calculate the slider value
             var value = (100 / videoDuration) * videoCurrentTime;
             this.seekHead.style.width = value + "%";
+            this.thumb.style.left = value + "%";
             this.forwardIndicator.style.left = (value - this.SKIP_INDICATOR_OFFSET) + "%";
             this.rewindIndicator.style.left = (value - this.SKIP_INDICATOR_OFFSET) + "%";
             this.$currSeekTime.text(this.convertSecondsToHHMMSS(videoCurrentTime, this.videoDuration > 3600 ));
@@ -305,6 +315,7 @@
         * @description pause the currently playing video, called when app loses focus
         */
         this.pausePressed = function () {
+            $(".player-back-button").attr("src","assets/btn_previewPlay.png");
             if (this.pauseTimeout) {
                 clearTimeout(this.pauseTimeout);
                 this.pauseTimeout = 0;
@@ -326,6 +337,7 @@
         * @description resume the currently playing video, called when app regains focus
         */
         this.resumePressed = function() {
+            $(".player-back-button").attr("src","assets/btn_pause.png");
             // hide pause icon
             this.playIcon.style.opacity = "0";
             this.showAndHideControls();

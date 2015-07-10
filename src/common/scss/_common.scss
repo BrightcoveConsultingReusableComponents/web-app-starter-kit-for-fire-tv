@@ -384,7 +384,7 @@ div {
 .player-controls-container {
     position : absolute;
     width    : 100%;
-    height   : 30%;
+    height   : 9%;
     padding  : 0 8%;
     bottom   : 0;
     opacity  : 0;
@@ -395,30 +395,46 @@ div {
 
 .player-controls-timeline-container {
     position   : relative;
-    height     : 10px;
-    margin-top : 20px;
+    height     : 60px;
+    margin-top : 30px;
+    overflow: hidden;
 }
 
 .player-controls-timeline {
     position : absolute;
     top      : 0;
     left     : 0;
-    width    : 100%;
-    height   : 100%;
+    width    : 80%;
+    height   : 70%;
     border           : 1px solid $color-timeline-border;
     border-radius    : 6px;
     background-color : $color-timeline-bg;
+    opacity: 0.8;
 }
 
 .player-controls-timeline-playhead {
     position : absolute;
     width  : 0%;
-    height : 10px;
-    border : 1px solid $color-playhead-border;
+    height : 100%;
+    border : 1px solid $color-theme-transparent;
     margin-top       : -1px;
     border-radius    : 6px;
-    background-color : $color-playhead-bg;
+    background-color : $color-theme-transparent;
+    margin-left: -0.6%;
 }
+
+.player-controls-timeline-thumb {
+    position : absolute;
+    width  : 3.3%;
+    height : 100%;
+    border : 1px solid rgba(255, 255, 255, 1.0);
+    margin-top       : -1px;
+    border-radius:9999px;
+    background-color : rgba(255, 255, 255, 1.0);
+    opacity: 1;
+    margin-left: -2.7%;
+}
+
 
 .player-controls-skip-indicator {
     position : absolute;
@@ -469,29 +485,77 @@ div {
 }
 
 .player-controls-timestamp {
-    margin-top  : 10px;
+    margin-top  : -5px;
     font-size        : 1.6em;
+    float: right;
+    padding-right: 5px;
 }
 
 .player-controls-timestamp-curtime {
     @extend .player-controls-timestamp;
+    color   : $color-meta-secondary-text;
+    display : inline-block;
+}
+
+.player-controls-timestamp-division {
+    @extend .player-controls-timestamp;
     color   : $color-meta-primary-text;
     display : inline-block;
-    float   : left;
 }
 
 .player-controls-timestamp-totaltime {
     @extend .player-controls-timestamp;
-    color   : $color-meta-secondary-text;
+    color   : $color-theme-transparent;
     display : inline-block;
-    float   : right;
+}
+
+.player-controls-button-back {
+    display : none;
+}
+
+.gradient-to-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: block;    background: linear-gradient(
+    to bottom, 
+    rgba(0, 0, 0, 1.0),  
+    rgba(0, 0, 0, 0.0) 85%,
+    rgba(0, 0, 0, 0.0) 100%
+    );
+}
+.player-controls-content-image {
+    position    : absolute;
+    top         : 50px;
+    left        :  100px;
+    height      : 180px;
+    width       : 180px;
+    color       : $color-title-text;
+    font-size       : 1.8em;
+    font-family   : $font-family-medium;
+    margin-top  : 20px;
+    overflow    : hidden;
+    @include display-box;
+    -webkit-box-shadow: $color-theme-box-shadow;
+    -moz-box-shadow: $color-theme-box-shadow;
+    box-shadow: $color-theme-box-shadow;
+    border: $color-theme-border;
+    background-image: $img-icon-search;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 9999px;
 }
 
 .player-controls-content-title {
     position    : absolute;
-    top         : 80px;
+    top         : 72px;
+    left        :  300px;
     height      : 59px;
-    color       : $color-title-text;
+    width       : 40%;
+    color       : $color-theme-transparent;
     font-size       : 1.8em;
     font-family   : $font-family-medium;
     margin-top  : 20px;
@@ -501,24 +565,24 @@ div {
     @include line-clamp(1);
 }
 
-.player-controls-button-back {
-    display : none;
-}
-
 .player-controls-content-subtitle {
     position : absolute;
-    top      : 170px;
-    width    : 60%;
+    top      : 162px;
+    left     :  300px;
+    width       : 40%;
     height   : 72px;
     color    : $color-description-text;
     font-style: italic;
     font-size: 1.1em;
+    overflow    : hidden;
     @include display-box;
     @include box-orient(vertical);
     @include line-clamp(2);
 }
 
+
 .player-pause-button {
+    display: none;
     position   : absolute;
     top        : 250px;
     left       : 870px;
@@ -534,7 +598,7 @@ div {
     position : absolute;
     height   : 100%;
     width    : 30%;
-    right    : 0;
+    left    : 0;
     display  : flex;
     color    : $color-meta-secondary-text;
     background-color : $color-player-controls-bg;
@@ -692,8 +756,11 @@ div {
         position: absolute;
         display : block;
         float   : left;
-        top     : 10px;
+        top     : 15px;
         left    : 30px;
+        img {
+            height: 70px;
+        }
     }
 
     .detail-row-container-buttons {

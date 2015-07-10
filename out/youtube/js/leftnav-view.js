@@ -85,6 +85,7 @@
         * Show the left-nav overlay that covers the one-d-view
         */
         this.expand = function () {
+            console.log('expand');
             this.leftNavContainerEle.classList.remove('leftnav-menulist-collapsed');
             this.leftNavContainerEle.classList.add('leftnav-menulist-expanded');
 

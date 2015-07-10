@@ -133,6 +133,10 @@
          * @description Handles video element pause event
          */
         this.pauseEventHandler = function() {
+            $(".gradient-to-bottom").show();
+            $(".player-controls-content-image").show();
+            $(".player-controls-content-title").show();
+            $(".player-controls-content-subtitle").show();
             // we trigger the video status in the pause event handler because the pause event can come from the system
             // specifically it can be caused by the voice search functionality of Fire OS
 
@@ -149,6 +153,11 @@
         }.bind(this);
 
         this.playEventHandler = function() {
+            console.log('play');
+            $(".gradient-to-bottom").hide();
+            $(".player-controls-content-image").hide();
+            $(".player-controls-content-title").hide();
+            $(".player-controls-content-subtitle").hide();
             this.clearTimeouts();
             this.setTimeouts();
         }.bind(this);
@@ -345,6 +354,7 @@
 
             this.$containerControls = $container.find(".player-controls-container");
             this.containerControls = this.$containerControls[0];
+            this.buttonBack = $container.find(".player-controls-button-back ");
 
             // dynamically build the player video element
             this.playerHTML = '<video id="' + video_data.id + '" data-account="' + settings.accountID +
