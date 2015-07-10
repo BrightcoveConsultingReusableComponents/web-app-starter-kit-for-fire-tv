@@ -18,7 +18,3 @@
 
 USE:
 * [Setting up the work environment](https://github.com/BrightcoveConsultingReusableComponents/web-app-starter-kit-for-fire-tv/docs/assets/*****.md)
-building.md 
-testing-and-submission.md
-EXTRA:
-style-edit.md     
