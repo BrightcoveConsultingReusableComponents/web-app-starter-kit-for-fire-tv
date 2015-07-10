@@ -9,6 +9,6 @@ The full disclosure of Brightcove support for webfireTV is obtained here:
 
 * [Brightcove](./assets/brightcove.md)
 
-Related DOCS:
+####Related DOCS:
 * [Test and Submission](./assets/testing-and-submission.md)
 * [Building](./assets/building.md)

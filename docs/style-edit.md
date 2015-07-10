@@ -10,6 +10,6 @@ Also, the theming guide can be conveniently found in this link:
 * [Theme Guide](./assets/theming_guide.pdf)
 
 
-Related DOCS:
+####Related DOCS:
 * [Test and Submission](./assets/testing-and-submission.md)
 * [Building](./assets/building.md)

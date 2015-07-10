@@ -33,7 +33,7 @@ The full explanation about Gulp build and installation in this project is here (
 
 * [GULP](./assets/building.md)  
 
-Related DOCS:
+#####Related DOCS:
 * [Test and Submission](./assets/testing-and-submission.md)
 * [Building](./assets/building.md)
 * [Styling](./assets/styling.md)
