@@ -3,21 +3,24 @@
 
 #####Documentation about everything related webfire, including details about the structure, coding and styling:
 
-The general explanation about what is necessary to make a functional app and what are the possible functions with it
+The general explanation about what is necessary to make a functional app and what are the possible functions it can provide
 
-* [Structure and Possibilities](https://www.npmjs.org/package/serve)
+* [Structure and Possibilities](./docs/structure.md)
 
-The general explanation about what is necessary to make a functional app and what are the possible functions with it
+How to set up the work environment for the project
 
-* [Setting up the environment](https://www.npmjs.org/package/serve)
+* [Setting up the work environment](./docs/setting.md)
 
-The general explanation about what is necessary to make a functional app and what are the possible functions with it
+Architecture of the project and Brightcove support
 
-* [Styling + Editing](https://www.npmjs.org/package/serve)
+* [Architecture and Brightcove](./docs/bc-arch.md)
 
-The general explanation about what is necessary to make a functional app and what are the possible functions with it
+Styling and editing explanation
 
-* [Amazon Documentation](https://www.npmjs.org/package/serve)
+* [Styling + Editing](./docs/style-edit.md)
 
+The original documentation from amazon
+
+* [Amazon Documentation](https://github.com/amzn/web-app-starter-kit-for-fire-tv)
 
 

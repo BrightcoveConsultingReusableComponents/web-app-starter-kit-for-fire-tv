@@ -1,20 +1,15 @@
 # Styling and Editing
 -----------------------------
 
+The full styling explanation can be found in the doc here
+
+* [Styling](./assets/styling.md)
+
+Also, the theming guide can be conveniently found in this link:
+
+* [Theme Guide](./assets/theming_guide.pdf)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-USE:
-* [Setting up the work environment](https://github.com/BrightcoveConsultingReusableComponents/web-app-starter-kit-for-fire-tv/docs/assets/*****.md)
+Related DOCS:
+* [Test and Submission](./assets/testing-and-submission.md)
+* [Building](./assets/building.md)
