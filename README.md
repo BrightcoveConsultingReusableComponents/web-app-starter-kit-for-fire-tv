@@ -1,14 +1,23 @@
 # Web App - Fire TV
 -------------------
 
-The documentation that explains how the webfire TV works, including details about the structure:
+##### General Documentation
 
-The general explanation about what is necessary to make a functional app and what are the possible functions with it
-*[Structure and Possibilities](https://www.npmjs.org/package/serve)
-The general explanation about what is necessary to make a functional app and what are the possible functions with it
-*[Setting up the environment](https://www.npmjs.org/package/serve)
-The general explanation about what is necessary to make a functional app and what are the possible functions with it
-*[Styling + Editing](https://www.npmjs.org/package/serve)
-The general explanation about what is necessary to make a functional app and what are the possible functions with it
-*[Amazon Documentation](https://www.npmjs.org/package/serve)
+The general explanation about what is necessary to make an app and its possible functionalities
+
+* [Structure and Possibilities](https://github.com/BrightcoveConsultingReusableComponents/web-app-starter-kit-for-fire-tv/docs/structure.md)
+
+How to set up the environment: Gulp, Sass and editing methods
+
+* [Setting up the work environment](https://github.com/BrightcoveConsultingReusableComponents/web-app-starter-kit-for-fire-tv/docs/setting.md)
+
+Architecture of the sample and Brightcove support and peculiarities
+
+* [Architeture and Brightcove](https://github.com/BrightcoveConsultingReusableComponents/web-app-starter-kit-for-fire-tv/docs/arch-bc.md)	
+
+Styling and Editing
+
+* [Styling and Editing](https://github.com/BrightcoveConsultingReusableComponents/web-app-starter-kit-for-fire-tv/docs/style-edit.md)
+
+
 	
