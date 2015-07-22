@@ -127,7 +127,7 @@
         * User has pressed the back button
         */
         this.exitApp = function () {
-            if (confirm("Are you sure you want to exit?")) {
+            if (confirm("Are you sure you want to exit???")) {
                 window.open('', '_self').close();
             }
             buttons.resync();

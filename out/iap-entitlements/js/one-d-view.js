@@ -323,7 +323,7 @@
          */
         this.showExtraData = function (index) {
             index = index || 0;
-
+            $('.shoveler-play-button').show();
             //add description
             this.$el.find(".one-D-summary-title").html(this.rowElements[index].title);
             this.$el.find(".one-D-summary-description").html(this.rowElements[index].description);
@@ -357,6 +357,7 @@
             this.$el.find(".one-D-summary-pubdate").text("");
             this.$el.find(".one-D-summary-description").text("");
             this.$el.find("#summary-buttons-container").css("visibility", "hidden" );
+            $('.shoveler-play-button').hide();
         };
     }
 

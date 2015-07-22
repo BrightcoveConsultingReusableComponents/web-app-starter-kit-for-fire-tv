@@ -201,8 +201,8 @@
                 case "playing":
                     this.timeUpdateHandler(duration, currentTime);
                     $('#app-loading-image').hide();
-                    $('#app-loading-spinner').width('186');
-                    $('#app-loading-spinner').height('186');
+                    $('#app-loading-spinner').width('150');
+                    $('#app-loading-spinner').height('150');
                     $('#app-loading-spinner').css('top', '80px');
                     $('#app-loading-spinner').css('right', '60px');
                 case "resumed":
