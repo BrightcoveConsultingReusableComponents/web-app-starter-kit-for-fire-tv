@@ -32,7 +32,8 @@
 
 
         this.PREVIEW_TIME_DEFAULT = 10;
-
+        
+        console.log('tem playlist');
         /**
          * @function remove
          * @description function to remove current player view and the preloaded player view

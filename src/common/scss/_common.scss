@@ -397,6 +397,7 @@ div {
     position   : relative;
     height     : 60px;
     margin-top : 30px;
+    width: 110%;
     overflow: hidden;
 }
 
@@ -404,12 +405,13 @@ div {
     position : absolute;
     top      : 0;
     left     : 0;
-    width    : 80%;
+    width    : 70%;
     height   : 70%;
     border           : 1px solid $color-timeline-border;
     border-radius    : 6px;
     background-color : $color-timeline-bg;
     opacity: 0.8;
+    margin-left: 5%;
 }
 
 .player-controls-timeline-playhead {
@@ -485,10 +487,11 @@ div {
 }
 
 .player-controls-timestamp {
+    position: relative;
     margin-top  : -5px;
     font-size        : 1.6em;
-    float: right;
     padding-right: 5px;
+    left: 77%;
 }
 
 .player-controls-timestamp-curtime {
@@ -520,7 +523,7 @@ div {
     right: 0;
     top: 0;
     display: block;    background: linear-gradient(
-    to bottom, 
+    to top, 
     rgba(0, 0, 0, 1.0),  
     rgba(0, 0, 0, 0.0) 85%,
     rgba(0, 0, 0, 0.0) 100%
@@ -528,10 +531,10 @@ div {
 }
 .player-controls-content-image {
     position    : absolute;
-    top         : 50px;
-    left        :  100px;
-    height      : 180px;
-    width       : 180px;
+    bottom         : 110px;
+    left        :  30px;
+    height      : 135px;
+    width       : 198px;
     color       : $color-title-text;
     font-size       : 1.8em;
     font-family   : $font-family-medium;
@@ -546,13 +549,31 @@ div {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.watermark {
+    position    : absolute;
+    bottom      : 85px;
+    right       :  120px;
+    height      : 145px;
+    width       : 145px;
+    color       : $color-title-text;
+    margin-top  : 20px;
+    font-size       : 1.8em;
+    font-family   : $font-family-medium;
+    overflow    : hidden;
+    @include display-box;
+    background-image: $watermark-image;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 9999px;
 }
 
 .player-controls-content-title {
     position    : absolute;
-    top         : 72px;
-    left        :  300px;
+    bottom         : 190px;
+    left        :  285px;
     height      : 59px;
     width       : 40%;
     color       : $color-theme-transparent;
@@ -567,8 +588,8 @@ div {
 
 .player-controls-content-subtitle {
     position : absolute;
-    top      : 162px;
-    left     :  300px;
+    bottom      : 122px;
+    left     :  285px;
     width       : 40%;
     height   : 72px;
     color    : $color-description-text;
@@ -597,64 +618,84 @@ div {
 .next-video-main-container {
     position : absolute;
     height   : 100%;
-    width    : 30%;
+    width    : 100%;
     left    : 0;
     display  : flex;
     color    : $color-meta-secondary-text;
-    background-color : $color-player-controls-bg;
-    flex-direction : column;
+    background: linear-gradient(
+    to bottom, 
+    rgba(0, 0, 0, 1.0),  
+    rgba(0, 0, 0, 0.0) 85%,
+    rgba(0, 0, 0, 0.0) 100%
+    );
+    //background-color : $color-player-controls-bg;
+    //flex-direction : column;
 }
 
 .next-video-text {
-    margin-top : 60px;
+    display: none;
+    /*margin-top : 60px;
     margin-left: 50px;
     font-weight: bold;
     font-size: 1.1em;
-    color: $color-meta-primary-text;
+    color: $color-meta-primary-text;*/
 }
 
 .next-video-thumbnail {
-    height: 250px;
-    max-width: 425px;
-    margin-left: 50px;
-    margin-top: 30px;
-    width: auto;
+    height: 300px;
+    width: 300px;
+    margin-left: 60px;
+    margin-top: 50px;
     img {
-        width : 100%;
-        height: 100%;
+        width : 95%;
+        height: 95%;
         border: solid 1px $color-thumbnail-border;
+        @include display-box;
+        -webkit-box-shadow: $color-theme-box-shadow;
+        -moz-box-shadow: $color-theme-box-shadow;
+        box-shadow: $color-theme-box-shadow;
+        border: $color-theme-border;
+        border-radius: 9999px;
     }
 }
 
 .next-video-thumbnail:after {
-    position : relative;
+    display  : none;
+    /*position : relative;
     top      : -250px;
     height   : 100%;
     width    : 100%;
     z-index  : 90;
     content  : " ";
-    display  : block;
     background-position : center;
     background-repeat   : no-repeat;
-    background-image    : $img-nextvideo-preview-play;
+    background-image    : $img-nextvideo-preview-play;*/
 }
 
 .next-video-playingtext {
     margin-left : 50px;
-    margin-top  : 15px;
+    margin-top  : 80px;
+    font-size: 60px;
+    width: 30%;
 }
 
+#next-video-upnext {
+    color : $color-theme-transparent;
+}
 .next-video-title {
-    margin-left : 50px;
-    margin-top  : 30px;
+    margin-top  : 170px;
+    margin-left: -30%;
+    float: bottom;
     color       : $color-title-text;
     font-weight : lighter;
-    font-size       : 2.5em;
-    line-height: 1;
+    font-size       : 50px;
+    width       : 33%;
+    overflow: hidden;
 }
 
 .next-video-description {
-    margin-top  : 30px;
+    display: none;
+    /*margin-top  : 30px;
     margin-left : 50px;
     overflow    : hidden;
     font-size   :  1.1em;
@@ -662,7 +703,7 @@ div {
     text-overflow : ellipsis;
     display       : -webkit-box;
     @include line-clamp(5);
-    @include box-orient(vertical)
+    @include box-orient(vertical)*/
 }
 
 //
@@ -688,23 +729,47 @@ div {
   margin: 6em auto;
   font-size: 10px;
   position: absolute;
-  top: 400px;
-  left: 900px;
+  top: 80px;
+  right: 60px;
   z-index: 600;
   text-indent: -9999em;
-  border-top: 1.2em solid rgba(255, 255, 255, 0.2);
-  border-right: 1.2em solid #ffffff;
-  border-bottom: 1.2em solid #ffffff;
-  border-left: 1.2em solid #ffffff;
+  border-top: 1.2em solid $color-theme-transparent;
+  border-right: 1.2em solid $color-theme;
+  border-bottom: 1.2em solid $color-theme;
+  border-left: 1.2em solid $color-theme;
   @include animation(spin 1.3s infinite linear);
 }
 
 .content-load-spinner,
 .content-load-spinner:after {
   border-radius: 50%;
-  width: 15em;
-  height: 15em;
+  width: 21em;
+  height: 21em;
 }
+
+.content-load-image {
+    display: none;
+    position: absolute;
+    top: 300px;
+    right: 600px;
+    z-index: 600;
+    background-image: $img-icon-search;
+    /*-webkit-box-shadow: $color-theme-box-shadow;
+    -moz-box-shadow: $color-theme-box-shadow;
+    box-shadow: $color-theme-box-shadow;
+    border: $color-theme-border;*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.content-load-image,
+.content-load-image:after {
+  border-radius: 50%;
+  width: 20em;
+  height: 20em;
+}
+
 
 .modal-dialog {
   z-index: 650;
@@ -760,6 +825,7 @@ div {
         left    : 30px;
         img {
             height: 70px;
+            margin-left: 60px;
         }
     }
 

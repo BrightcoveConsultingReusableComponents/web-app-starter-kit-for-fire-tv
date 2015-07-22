@@ -133,6 +133,8 @@
          * @description Handles video element pause event
          */
         this.pauseEventHandler = function() {
+            $(".player-back-button").attr("src","assets/btn_player.png");
+            $(".watermark").show();
             $(".gradient-to-bottom").show();
             $(".player-controls-content-image").show();
             $(".player-controls-content-title").show();
@@ -153,7 +155,8 @@
         }.bind(this);
 
         this.playEventHandler = function() {
-            console.log('play');
+            $(".player-back-button").attr("src","assets/btn_pause.png");
+            $(".watermark").hide();
             $(".gradient-to-bottom").hide();
             $(".player-controls-content-image").hide();
             $(".player-controls-content-title").hide();

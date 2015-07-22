@@ -122,7 +122,7 @@
         this.render = function ($container, data, playerView) {
             // Build the  content template and add it
             var html = utils.buildTemplate($("#controls-view-template"), {});
-
+            
             $container.append(html);
             this.$containerControls = $container.children().last();
             this.containerControls = $container.children().last()[0];
@@ -131,6 +131,13 @@
             this.contentTitle = $container.find(".player-controls-content-title");
             this.contentSubtitle = $container.find(".player-controls-content-subtitle");
             var thumbURL = 'url('+data.thumbURL+')';
+            
+            $('#app-loading-image').css('background-image', thumbURL);
+            $('#app-loading-image').show();
+            $('#app-loading-spinner').width('31em');
+            $('#app-loading-spinner').height('31em');
+            $('#app-loading-spinner').css('top', '230px');
+            $('#app-loading-spinner').css('right', '592px');
             
             this.contentImage.css('background-image', thumbURL);
             this.contentTitle.text(data.title);
@@ -193,7 +200,11 @@
                     break;
                 case "playing":
                     this.timeUpdateHandler(duration, currentTime);
-                    break;
+                    $('#app-loading-image').hide();
+                    $('#app-loading-spinner').width('186');
+                    $('#app-loading-spinner').height('186');
+                    $('#app-loading-spinner').css('top', '80px');
+                    $('#app-loading-spinner').css('right', '60px');
                 case "resumed":
                     this.resumePressed();
                     break;
@@ -315,7 +326,6 @@
         * @description pause the currently playing video, called when app loses focus
         */
         this.pausePressed = function () {
-            $(".player-back-button").attr("src","assets/btn_previewPlay.png");
             if (this.pauseTimeout) {
                 clearTimeout(this.pauseTimeout);
                 this.pauseTimeout = 0;
@@ -337,7 +347,6 @@
         * @description resume the currently playing video, called when app regains focus
         */
         this.resumePressed = function() {
-            $(".player-back-button").attr("src","assets/btn_pause.png");
             // hide pause icon
             this.playIcon.style.opacity = "0";
             this.showAndHideControls();

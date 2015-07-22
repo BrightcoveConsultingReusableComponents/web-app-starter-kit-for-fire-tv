@@ -30,6 +30,7 @@
             if (this.eventSet && this.eventSet.indexOf(event) === -1) {
                 throw "Unknown event: " + event;
             }
+            console.log(event);
             var handlers = this.eventHandlers[event] || (this.eventHandlers[event] = []);
             handlers.push({callback: callback, context: context});
         };

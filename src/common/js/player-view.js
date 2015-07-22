@@ -53,6 +53,7 @@
             this.canplay = true;
             //prevent triggering 'canplay' event when skipping or when video is paused
             if (!this.paused && !this.isSkipping) {
+                console.log('canPlay');
                 this.buttonDowntime = this.videoElement.currentTime;
                 this.trigger('videoStatus', this.videoElement.currentTime, this.videoElement.duration, 'canplay');
             }
@@ -212,6 +213,7 @@
          */
         this.show = function() {
             this.$el.css("visibility", "");
+            console.log('show video');
             if (this.durationFound) {
                 this.controlsView.showAndHideControls();
             }
