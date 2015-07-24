@@ -361,6 +361,7 @@
                 switch (e.keyCode) {
                     case buttons.BACK:
                         this.trigger('exit');
+                        console.log('aqui');
                         break;
 
                     case buttons.LEFT:

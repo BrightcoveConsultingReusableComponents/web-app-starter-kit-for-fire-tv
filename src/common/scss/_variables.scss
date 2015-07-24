@@ -16,10 +16,13 @@
 //
 //Images
 //
-$img-app-background : none !default;
+$img-app-background : url('assets/black_back.jpg') !default;
 //$img-app-background : url('assets/search.png') !default;
-$img-icon-leftnav   : url('assets/icon_leftnav_arrowDown.png') !default;
+$img-icon-leftnav   : url('assets/video_icon.png') !default;
 $img-icon-search    : url('assets/search.png') !default;
+$img-icon-search_2  : url('assets/search_icon.png') !default;
+$img-icon-video    : url('assets/video_icon.png') !default;
+$img-icon-login    : url('assets/login_icon.png') !default;
 $img-icon-lock      : url('assets/icon_lock.png') !default;
 $img-player-indicator-forward : url('assets/forward-arrow.png') !default;
 $img-player-indicator-reverse : url('assets/rewind-arrow.png') !default;
@@ -49,7 +52,7 @@ $font-family-bold    : 'Helvetica Neue Bold', 'HelveticaNeue-Bold', Helvetica, A
 $color-theme         :  rgb(223,115,183);
 $color-theme-opaque :  rgba(223,115,183, 1.0);
 $color-theme-transparent :  rgba(223,115,183, 0.6);
-$color-theme-box-shadow  : 0px 0px 15px 5px rgba(223,115,183, 0.5);
+$color-theme-box-shadow  : 0px 0px 20px 15px rgba(223,115,183, 0.5);
 $color-theme-border  :  0.5px rgba(223,115,183, 0.5);
 
 
@@ -81,6 +84,7 @@ $color-menu-base-bg : rgba(#000000, 0.9) !default;
 
 $color-menu-item-text :  #b9bbbd !default;
 $color-menu-item-bg: rgba(#e8e8e8, 0.1) !default;
+$color-icon-menu-item-bg: rgba(#f5f5f5, 0.4) !default;
 $color-menu-item-chosen-text    : #e8e8e8 !default;
 $color-menu-item-chosen-bg: #3f484f !default;
 $color-menu-item-highlight-text: #e8e8e8 !default;

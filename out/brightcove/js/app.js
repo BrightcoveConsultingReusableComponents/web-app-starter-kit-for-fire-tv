@@ -99,7 +99,7 @@
                 logo = app.data.appLogo;
             } 
             else {
-                logo = "assets/img_logo.png";
+                logo = "assets/brightcove.png";
             }
             
             var html = utils.buildTemplate($("#app-header-template"), {
@@ -209,6 +209,10 @@
             if (this.showSearch) {
                 this.searchInputView = new SearchInputView();
             }
+
+            leftNavView.on('changeCover', function() {
+                console.log('teste');
+            })
 
            /**
             * Event Handler - Select menu item

@@ -100,8 +100,24 @@ div {
 
 .app-logo {
   position: absolute;
-  bottom: -7px;
-  right: 150px; }
+  top: 20px;
+  right: 0;
+  width: 30%;
+  height: 60%; }
+  .app-logo img {
+    width: 100%;
+    height: 100%; }
+
+#right-nav-cover-image {
+  position: absolute;
+  top: 275px;
+  left: 950px;
+  width: 900px;
+  height: 600px;
+  background-color: white;
+  background-image: none;
+  background-size: 100% 100%;
+  display: none; }
 
 .leftnav-main-container {
   position: absolute;
@@ -125,20 +141,58 @@ div {
   z-index: 100; }
 
 .leftnav-menulist-collapsed {
-  top: 148px;
-  height: 86px;
-  z-index: 10; }
+  top: 340px;
+  height: 26%;
+  width: 8.5%;
+  z-index: 800;
+  border: 1px solid white;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  margin-left: -1px; }
+
+.leftnav-menulist-collapsed .left-nav-icon-menu {
+  width: 100%;
+  height: 100%; }
+
+.leftnav-menulist-collapsed #menu-search-icon {
+  width: 100%;
+  height: 33%;
+  padding-bottom: 5%;
+  background-image: url("assets/search_icon.png");
+  background-size: 85% 100%;
+  background-color: rgba(245, 245, 245, 0.4);
+  background-repeat: no-repeat; }
+
+.leftnav-menulist-collapsed #menu-login-icon {
+  width: 100%;
+  height: 33%;
+  background-image: url("assets/login_icon.png");
+  background-size: 85% 100%;
+  background-color: rgba(245, 245, 245, 0.4);
+  background-repeat: no-repeat; }
+
+.leftnav-menulist-collapsed #menu-video-icon {
+  width: 100%;
+  height: 34%;
+  padding-bottom: 5%;
+  padding-top: 5%;
+  background-image: url("assets/video_icon.png");
+  background-size: 85% 100%;
+  background-color: rgba(245, 245, 245, 0.4);
+  background-repeat: no-repeat; }
 
 .leftnav-collapsed-highlight {
-  -webkit-box-shadow: 0px 10px 18px 3px rgba(0, 0, 0, 0.44);
-  -moz-box-shadow: 0px 10px 18px 3px rgba(0, 0, 0, 0.44);
-  box-shadow: 0px 10px 18px 3px rgba(0, 0, 0, 0.44);
-  border: solid;
-  border-width: 1px;
-  border-color: #dadada; }
+  -webkit-box-shadow: 0px 10px 18px 3px black;
+  -moz-box-shadow: 0px 10px 18px 3px black;
+  box-shadow: 0px 10px 18px 3px black;
+  -webkit-box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+  -moz-box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+  box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+  border: 90px rgba(223, 115, 183, 0.6); }
 
 .leftnav-menulist-collapsed .leftnav-menu-scrolling-list {
-  margin-top: -148px; }
+  display: none; }
 
 .leftnav-menu-scrolling-list {
   color: white; }
@@ -193,8 +247,9 @@ div {
   filter: brightness(200%); }
 
 .leftnav-list-item-container .leftnav-list-item-selected {
-  color: white;
-  background: transparent none no-repeat right 40px center; }
+  color: transparent;
+  background: rgba(223, 115, 183, 0.6) none no-repeat right 40px center;
+  background-size: 70px 70px; }
 
 .leftnav-list-item-chosen {
   border-color: transparent;
@@ -404,6 +459,7 @@ div {
   transition-timing-function: linear; }
 
 .shoveler-play-button {
+  display: none;
   position: absolute;
   top: 310px;
   right: 33%;
@@ -463,9 +519,9 @@ div {
   -webkit-box-shadow: 0px 10px 18px 3px black;
   -moz-box-shadow: 0px 10px 18px 3px black;
   box-shadow: 0px 10px 18px 3px black;
-  -webkit-box-shadow: 0px 0px 15px 5px rgba(223, 115, 183, 0.5);
-  -moz-box-shadow: 0px 0px 15px 5px rgba(223, 115, 183, 0.5);
-  box-shadow: 0px 0px 15px 5px rgba(223, 115, 183, 0.5);
+  -webkit-box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+  -moz-box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+  box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
   border: 90px rgba(223, 115, 183, 0.6); }
 
 .shoveler-subcat-bg {
@@ -627,9 +683,9 @@ div {
   /* TWEENER - IE 10 */
   display: box;
   /* NEW, Spec - Opera 12.1, Firefox 20+ */
-  -webkit-box-shadow: 0px 0px 15px 5px rgba(223, 115, 183, 0.5);
-  -moz-box-shadow: 0px 0px 15px 5px rgba(223, 115, 183, 0.5);
-  box-shadow: 0px 0px 15px 5px rgba(223, 115, 183, 0.5);
+  -webkit-box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+  -moz-box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+  box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
   border: 0.5px rgba(223, 115, 183, 0.5);
   background-image: none;
   background-size: cover;
@@ -755,9 +811,9 @@ div {
     /* TWEENER - IE 10 */
     display: box;
     /* NEW, Spec - Opera 12.1, Firefox 20+ */
-    -webkit-box-shadow: 0px 0px 15px 5px rgba(223, 115, 183, 0.5);
-    -moz-box-shadow: 0px 0px 15px 5px rgba(223, 115, 183, 0.5);
-    box-shadow: 0px 0px 15px 5px rgba(223, 115, 183, 0.5);
+    -webkit-box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+    -moz-box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+    box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
     border: 0.5px rgba(223, 115, 183, 0.5);
     border-radius: 9999px; }
 

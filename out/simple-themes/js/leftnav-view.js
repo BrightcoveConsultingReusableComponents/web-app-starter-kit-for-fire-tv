@@ -24,7 +24,7 @@
     */
     function LeftNavView() {
         // mixin inheritance, initialize this as an event handler for these events:
-        Events.call(this, ['exit', 'deselect', 'indexChange', 'select', 'makeActive', 'loadComplete']);
+        Events.call(this, ['exit', 'deselect', 'indexChange', 'select', 'makeActive', 'loadComplete', 'changeCover']);
         
         this.scrollingContainerEle = null;
         this.leftNavContainerEle   = null;
@@ -67,6 +67,11 @@
         * Hide the left-nav overlay that covers the one-d-view
         */
         this.collapse = function () {
+            $('.app-logo').width(576);
+            $('.app-logo').height(144);
+            $('#one-D-shoveler-container').show();
+            $('#one-D-summary-container').show();
+
             //change container to the collapsed class
             this.leftNavContainerEle.classList.remove('leftnav-menulist-expanded');
             this.leftNavContainerEle.classList.add('leftnav-menulist-collapsed');
@@ -85,7 +90,21 @@
         * Show the left-nav overlay that covers the one-d-view
         */
         this.expand = function () {
-            console.log('expand');
+            $('.app-logo').width(975);
+            $('.app-logo').height(185);
+            $('#one-D-shoveler-container').hide();
+            $('#one-D-summary-container').hide();
+            var id = $('.shoveler-row-container').children().first().attr('id');
+            var img = $('#'+id).find('img');
+            var src = img.attr("src");
+            var url = "url('"+src+"')";
+            $('#right-nav-cover-image').css("background-image", url)
+            console.log(this.leftNavItems);
+            /*var id = $('.shoveler-row-container').children().first().attr('id');
+            $('.shoveler-row-container').not('#' + id).hide();
+            $('#one-D-shoveler-container').hide();
+            $('#one-D-summary-container').hide();*/
+
             this.leftNavContainerEle.classList.remove('leftnav-menulist-collapsed');
             this.leftNavContainerEle.classList.add('leftnav-menulist-expanded');
 
@@ -147,6 +166,7 @@
         * @param {Element} ele currently selected element
         */
         this.setHighlightedElement = function (ele) {
+            $('.shoveler-play-button').hide();
             ele = ele || this.currentSelectionEle;
 
             $(ele).removeClass(CLASS_MENU_ITEM_CHOSEN);
@@ -237,11 +257,13 @@
                     case buttons.UP:
                         if(this.isDisplayed) {
                             this.incrementCurrentSelectedIndex(-1);
+                            this.trigger('changeCover');
                         }
                         break;
                     case buttons.DOWN:
                         if(this.isDisplayed) {
                             this.incrementCurrentSelectedIndex(1);
+                            this.trigger('changeCover');
                         } else {
                             this.setChosenElement();
                             this.trigger('deselect');

@@ -290,6 +290,7 @@
                          dirty = true;
                          break;
                     case buttons.DOWN:
+                         console.log('down');
                          //handle button view if we have one
                          if(this.buttonView) { //content buttons are visible
                              if(this.currentView !== this.buttonView) {
