@@ -67,10 +67,9 @@
         * Hide the left-nav overlay that covers the one-d-view
         */
         this.collapse = function () {
-            $('.app-logo').width(576);
-            $('.app-logo').height(144);
             $('#one-D-shoveler-container').show();
             $('#one-D-summary-container').show();
+            $('.right-nav').hide();
 
             //change container to the collapsed class
             this.leftNavContainerEle.classList.remove('leftnav-menulist-expanded');
@@ -90,20 +89,29 @@
         * Show the left-nav overlay that covers the one-d-view
         */
         this.expand = function () {
-            $('.app-logo').width(975);
-            $('.app-logo').height(185);
+            //hide or show the respective elements
             $('#one-D-shoveler-container').hide();
             $('#one-D-summary-container').hide();
-            var id = $('.shoveler-row-container').children().first().attr('id');
-            var img = $('#'+id).find('img');
-            var src = img.attr("src");
-            var url = "url('"+src+"')";
-            $('#right-nav-cover-image').css("background-image", url)
-            console.log(this.leftNavItems);
-            /*var id = $('.shoveler-row-container').children().first().attr('id');
-            $('.shoveler-row-container').not('#' + id).hide();
-            $('#one-D-shoveler-container').hide();
-            $('#one-D-summary-container').hide();*/
+            
+            //change the image, title, desc for the right nav playlist cover
+            setTimeout(function(){
+                //get variables
+                var id = $('.shoveler-row-container').children().first().attr('id');
+                var img = $('#'+id).find('img');
+                var src = img.attr("src");
+                var url = "url('"+src+"')";
+                var playlistTitle = String($('.leftnav-list-item-selected').text()).trim();
+                var playlistLength = $('.shoveler-row-container').children().length;
+
+                if(src){
+                    $('.right-nav').show();
+                    $('#right-nav-cover-image').css("background-image", url);
+                    $('#right-nav-cover-title').text(playlistTitle);
+                    $('#right-nav-cover-desc').text(playlistLength + " videos");
+                } else{
+                    $('.right-nav').hide();
+                }
+            }, 250);
 
             this.leftNavContainerEle.classList.remove('leftnav-menulist-collapsed');
             this.leftNavContainerEle.classList.add('leftnav-menulist-expanded');

@@ -77,6 +77,7 @@
         this.render = function ($el, rowData, displayButtonsParam) {
             //Make sure we don't already have a full container
             this.remove();
+            $('.right-nav').hide();
 
             // Build the main content template and add it
             this.titleText = rowData.title;
@@ -290,7 +291,6 @@
                          dirty = true;
                          break;
                     case buttons.DOWN:
-                         console.log('down');
                          //handle button view if we have one
                          if(this.buttonView) { //content buttons are visible
                              if(this.currentView !== this.buttonView) {

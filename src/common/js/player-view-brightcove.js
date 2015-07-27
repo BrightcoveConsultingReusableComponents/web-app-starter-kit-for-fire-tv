@@ -125,7 +125,6 @@
                 this.buttonDowntime = this.brightcovePlayer.currentTime();
                 this.trigger('videoStatus', this.brightcovePlayer.currentTime(), this.brightcovePlayer.duration(),
                     'canplay');
-                console.log('vd2');
             }
         }.bind(this);
 
@@ -456,7 +455,6 @@
                     this.currButtonSpeed = this.BUTTON_INTERVALS;                    
                     this.trigger('videoStatus', this.brightcovePlayer.currentTime(), this.brightcovePlayer.duration(),
                         'playing');
-                    console.log('vd2');
                 }
             }
         }.bind(this);
@@ -594,7 +592,6 @@
                 switch (e.keyCode) {
                     case buttons.BACK:
                         this.trigger('exit');
-                        console.log('aqui');
                         break;
                     case buttons.LEFT:
                     case buttons.REWIND:

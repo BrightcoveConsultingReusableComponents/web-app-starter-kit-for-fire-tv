@@ -209,9 +209,24 @@
             if (this.showSearch) {
                 this.searchInputView = new SearchInputView();
             }
+            
+            var makePlaylistCover = function(categoryData) {
+                //getting the variables to the playlist cover variables
+                var firstKey = Object.keys(categoryData)[0];
+                var src = categoryData[firstKey].imgURL;
+                var title = categoryData[firstKey].title;
+                var url = "url('"+src+"')";
+                var playlistTitle = String($('.leftnav-list-item-selected').text()).trim();
+                var playlistLength = categoryData.length;
 
-            leftNavView.on('changeCover', function() {
-                console.log('teste');
+                //image, title and extra information about the playlist
+                $('#right-nav-cover-image').css("background-image", url);
+                $('#right-nav-cover-title').text(playlistTitle);
+                $('#right-nav-cover-desc').text(playlistLength + " videos");
+            }
+
+            leftNavView.on('changeCover', function(index) {
+                app.data.getCategoryData(makePlaylistCover);
             })
 
            /**
@@ -302,8 +317,7 @@
                 //set the newly selected category index
                 if (this.showSearch && index === 0) {
                     this.searchInputView.select();
-                }
-                else {
+                } else {
                     if (this.showSearch) {
                         app.data.setCurrentCategory(index - 1);
                     } 

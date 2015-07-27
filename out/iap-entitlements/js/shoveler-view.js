@@ -131,7 +131,6 @@
                      $currElt.prepend('<img class = "shoveler-full-img" src="'+ this.rowsData[i].imgURL + '" style="opacity:0"/>');
                      $currImage = $currElt.children("img.shoveler-full-img");
                 }
-
                 //set a callback to make sure all images are loaded 
                 this.createImageLoadHandlers($currElt, $currImage, i);
 
