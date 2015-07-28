@@ -176,7 +176,6 @@
         this.setHighlightedElement = function (ele) {
             $('.shoveler-play-button').hide();
             ele = ele || this.currentSelectionEle;
-
             $(ele).removeClass(CLASS_MENU_ITEM_CHOSEN);
             $(ele).addClass(CLASS_MENU_ITEM_HIGHLIGHTED);
             this.leftNavContainerEle.classList.add('leftnav-collapsed-highlight');

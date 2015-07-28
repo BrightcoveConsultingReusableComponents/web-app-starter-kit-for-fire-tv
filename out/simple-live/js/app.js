@@ -754,7 +754,6 @@
                 errorHandler.writeToConsole(errType, errType.errToDev, errStack);
                 errorHandler.informDev(errType, errType.errToDev, errStack);
             }.bind(this));
-
             playerView.render(this.$appContainer, data, index);
         };
 

@@ -136,15 +136,15 @@ div {
 }
 
 .leftnav-menulist-collapsed {
-    @extend .leftnav-menu-list;
+    @extend .leftnav-menulist-expanded;
     top    : 0px;
     width: 11%;
     z-index: 800;
-    border: 1px solid white;
-    -webkit-border-radius:7px; 
-    -moz-border-radius:7px; 
-    border-radius:7px;
-    margin-left: -1px;
+    @include box-shadow(0px 10px 18px 3px rgba(0,0,0,1.0));
+    -webkit-box-shadow: $color-theme-box-shadow;
+    -moz-box-shadow: $color-theme-box-shadow;
+    box-shadow: $color-theme-box-shadow;
+    border: 90px $color-theme-transparent;
 }
 
 .leftnav-menulist-collapsed .left-nav-icon-menu {
@@ -403,20 +403,17 @@ div {
 .shoveler-play-button {
         display: none;
         position : absolute;
-        top      : 310px;
-        right    : 33%;
-        width    : 100px;
-        height   : 100px;
+        bottom     : 410px;
+        right    : 31.1%;
+        width    : 200px;
+        height   : 35px;
         z-index  : 700;
-        @include transform(translateZ(0));
-        @include transition-property-transform-plus(opacity);
-        @include transition-property-transform-plus(visibility);
-        @include transition-duration(1s);
-        @include transition-timing-function(linear);
-        background-image: $img-nextvideo-preview-play;
-        background-size: 100% 100%;
-        border-radius: 50%;
         background-color: $color-theme-transparent;
+        color: $color-overlay-text;
+        text-align: center;
+        vertical-align: center;
+        border-top: 1px solid $color-overlay-time-left;
+        border-left: 1px solid $color-overlay-time-left;
 }
 
 .shoveler-row-container {

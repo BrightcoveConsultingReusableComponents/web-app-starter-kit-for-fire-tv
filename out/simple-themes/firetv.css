@@ -18,7 +18,7 @@ body {
 .summaryTitle {
   text-transform: uppercase; }
 
-.leftnav-menulist-expanded {
+.leftnav-menulist-expanded, .leftnav-menulist-collapsed {
   background: linear-gradient(to right, #000000 0%, #000000 40%, transparent 100%) !important; }
 
 .leftnav-menu-scrolling-list {
@@ -181,7 +181,7 @@ div {
   overflow: hidden;
   background-color: transparent; }
 
-.leftnav-menulist-expanded {
+.leftnav-menulist-expanded, .leftnav-menulist-collapsed {
   height: 100%;
   top: 0;
   z-index: 100;
@@ -191,11 +191,13 @@ div {
   top: 0px;
   width: 11%;
   z-index: 800;
-  border: 1px solid white;
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  border-radius: 7px;
-  margin-left: -1px; }
+  -webkit-box-shadow: 0px 10px 18px 3px black;
+  -moz-box-shadow: 0px 10px 18px 3px black;
+  box-shadow: 0px 10px 18px 3px black;
+  -webkit-box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+  -moz-box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+  box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
+  border: 90px rgba(223, 115, 183, 0.6); }
 
 .leftnav-menulist-collapsed .left-nav-icon-menu {
   width: 100%;
@@ -206,7 +208,7 @@ div {
   height: 100%;
   padding-bottom: 5%;
   padding-top: 5%;
-  background-image: url("assets/menu.png");
+  background-image: url("assets/menu2.png");
   background-size: 100% 100%;
   background-repeat: no-repeat; }
 
@@ -483,30 +485,17 @@ div {
 .shoveler-play-button {
   display: none;
   position: absolute;
-  top: 310px;
-  right: 33%;
-  width: 100px;
-  height: 100px;
+  bottom: 410px;
+  right: 31.1%;
+  width: 200px;
+  height: 35px;
   z-index: 700;
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-transition-property: -webkit-transform opacity;
-  -moz-transition-property: -moz-transform opacity;
-  transition-property: transform opacity;
-  -webkit-transition-property: -webkit-transform visibility;
-  -moz-transition-property: -moz-transform visibility;
-  transition-property: transform visibility;
-  -webkit-transition-duration: 1s;
-  -moz-transition-duration: 1s;
-  transition-duration: 1s;
-  -webkit-transition-timing-function: linear;
-  -moz-transition-timing-function: linear;
-  transition-timing-function: linear;
-  background-image: url("assets/btn_previewPlay.png");
-  background-size: 100% 100%;
-  border-radius: 50%;
-  background-color: rgba(223, 115, 183, 0.6); }
+  background-color: rgba(223, 115, 183, 0.6);
+  color: #FFFFFF;
+  text-align: center;
+  vertical-align: center;
+  border-top: 1px solid rgba(232, 232, 232, 0.6);
+  border-left: 1px solid rgba(232, 232, 232, 0.6); }
 
 .shoveler-row-container {
   width: 100%;

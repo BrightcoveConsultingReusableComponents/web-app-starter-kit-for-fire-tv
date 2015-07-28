@@ -108,6 +108,7 @@
          * @param {string} set the new description
          */
         this.updateTitleAndDescription = function(title, description) {
+            console.log('q')
             this.$containerControls.find(".player-controls-content-title").text(title);
             this.$containerControls.find(".player-controls-content-subtitle").text(this.truncateSubtitle(description));
         }.bind(this);
@@ -132,6 +133,7 @@
             this.contentSubtitle = $container.find(".player-controls-content-subtitle");
             var thumbURL = 'url('+data.thumbURL+')';
             
+            //start loading spinner image
             $('#app-loading-image').css('background-image', thumbURL);
             $('#app-loading-image').show();
             $('#app-loading-spinner').width('31em');
@@ -141,10 +143,9 @@
             
             this.contentImage.css('background-image', thumbURL);
             this.contentTitle.text(data.title);
-            this.contentSubtitle.text(this.truncateSubtitle(data.description));
-
+            this.contentSubtitle.text(this.truncateSubtitle(data.pubDate));
             this.$containerControls.find(".player-controls-content-title").text(data.title);
-            this.$containerControls.find(".player-controls-content-subtitle").text(this.truncateSubtitle(data.description));
+            this.$containerControls.find(".player-controls-content-subtitle").text(this.truncateSubtitle(data.pubDate));
             this.seekHead = this.$containerControls.find(".player-controls-timeline-playhead")[0];
             this.thumb = this.$containerControls.find(".player-controls-timeline-thumb")[0];
             this.$currSeekTime = this.$containerControls.find(".player-controls-timestamp-curtime");
