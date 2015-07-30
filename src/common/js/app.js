@@ -127,8 +127,9 @@
         * User has pressed the back button
         */
         this.exitApp = function () {
-            if (confirm("Are you sure you want to exit???")) {
+            if (confirm("Are you sure you want to exit?")) {
                 window.open('', '_self').close();
+            } else{
             }
             buttons.resync();
         };
@@ -208,6 +209,7 @@
             var leftNavView = this.leftNavView = new LeftNavView();
             if (this.showSearch) {
                 this.searchInputView = new SearchInputView();
+                this.loginInputView = new LoginInputView();
             }
             
             var makePlaylistCover = function(categoryData) {
@@ -234,7 +236,10 @@
             * @param {Number} index the index of the selected item
             */
             leftNavView.on('select', function(index) {
-                if (!this.showSearch || index !== 0) {
+                if(this.searchInputView.isOnSearchMode){
+                    this.searchInputView.currentSearchQuery = this.searchInputView.$el.val();
+                }
+                if (!this.showSearch || index !== 1) {
                     //remove the contents of the oneDView
                     this.oneDView.remove();
                     
@@ -242,7 +247,7 @@
                     this.loadingSpinner.show.spinner();
 
                     //set the newly selected category index
-                    if(this.showSearch) { index--;}
+                    if(this.showSearch) { index=index-2;}
                     app.data.setCurrentCategory(index);
 
                     //update the content
@@ -281,7 +286,7 @@
             leftNavView.on('deselect', function() {
                 this.transitionFromLefNavToOneD();
                 if (this.oneDView.noItems) {
-                    this.exitApp();
+                    this.transitionToExpandedLeftNavView();
                 }
             }, this);
    
@@ -295,7 +300,7 @@
 
             if (this.showSearch) {
                 this.searchInputView.on('searchQueryEntered', function() {
-                    if (this.leftNavView.currSelectedIndex === 0) {
+                    if (this.leftNavView.currSelectedIndex === 1) {
                     this.leftNavView.searchUpdated = true;
                     this.leftNavView.confirmNavSelection();
                     }   
@@ -315,17 +320,21 @@
             */
             leftNavView.on('indexChange', function(index) {
                 //set the newly selected category index
-                if (this.showSearch && index === 0) {
+                if (index === 0) {
+                    this.loginInputView.select();
+                    this.searchInputView.deselect();
+                } else if(this.showSearch && index === 1){
                     this.searchInputView.select();
+                    this.loginInputView.deselect();
                 } else {
                     if (this.showSearch) {
-                        app.data.setCurrentCategory(index - 1);
+                        app.data.setCurrentCategory(index - 2);
                     } 
                     else {
                         app.data.setCurrentCategory(index);
                     }
                     if (this.showSearch) {
-                        this.searchInputView.deselect();
+                        this.searchInputView.deselect(index);
                     }
                 }
 
@@ -344,7 +353,8 @@
             var startIndex = 0;
             if (this.showSearch) {
                 leftNavData.unshift(this.searchInputView);
-                startIndex = 1;
+                leftNavData.unshift(this.loginInputView);
+                startIndex = 2;
             }
 
             leftNavView.render(app.$appContainer, leftNavData, startIndex);
@@ -597,8 +607,8 @@
         */
         this.transitionToLeftNavView = function() {
             this.selectView(this.leftNavView);
-            this.leftNavView.setHighlightedElement();
-
+            $('.shoveler-play-button').hide();
+            this.leftNavView.expand();
             //change size of selected shoveler item 
             this.oneDView.shrinkShoveler();
         };

@@ -38,7 +38,7 @@ div {
 
 .app-top-bar {
     position : absolute;
-    width    : 100%;
+    width    : 93%;
     height   : 120px;
     right: 0;
     background-color : $color-app-header-bg;
@@ -122,7 +122,7 @@ div {
     position : absolute;
     width    : 100%;
     height   : 100%;
-    padding  : 0px;
+    padding-top: 0px;
     overflow : hidden;
     background-color : $color-menu-base-bg;
 }
@@ -132,51 +132,37 @@ div {
     height : 100%;
     top    : 0;
     z-index: 100;
-    width: 90%;
+    width: 75%;
+    border-right: 5px solid $color-theme-transparent;
 }
 
 .leftnav-menulist-collapsed {
-    @extend .leftnav-menulist-expanded;
+    @extend .leftnav-menu-list;
     top    : 0px;
-    width: 11%;
-    z-index: 800;
-    @include box-shadow(0px 10px 18px 3px rgba(0,0,0,1.0));
-    -webkit-box-shadow: $color-theme-box-shadow;
-    -moz-box-shadow: $color-theme-box-shadow;
-    box-shadow: $color-theme-box-shadow;
-    border: 90px $color-theme-transparent;
+    width: 15%;
+    z-index: 900;
+    border-right: 5px solid $color-theme-transparent;
 }
 
-.leftnav-menulist-collapsed .left-nav-icon-menu {
-    width: 100%;
-    height: 100%;
+.leftnav-menulist-collapsed .leftnav-list-item-chosen{
+    border-width: 1px 1px 1px 0px;
+    background: $color-menu-item-bg $img-icon-leftnav no-repeat left 50px center;
+    background-size: 50px 53px;
 }
 
-.leftnav-menulist-collapsed #menu-video-icon {
-    width: 100%;
-    height: 100%;
-    padding-bottom: 5%;
-    padding-top: 5%;
-    background-image: $img-icon-video;
-    background-size: 100% 100%;
-    background-repeat:: no-repeat;
+.leftnav-menulist-collapsed .leftnav-list-item-static{
+    background-color: $color-menu-base-bg;
+    border: none;
+    opacity: 0.5;
 }
 
-
-.leftnav-collapsed-highlight {
-    @include box-shadow(0px 10px 18px 3px rgba(0,0,0,1.0));
-    -webkit-box-shadow: $color-theme-box-shadow;
-    -moz-box-shadow: $color-theme-box-shadow;
-    box-shadow: $color-theme-box-shadow;
-    border: 90px $color-theme-transparent;
-}
-
-.leftnav-menulist-collapsed .leftnav-menu-scrolling-list {
+.leftnav-menulist-collapsed .leftnav-list-item-static:not(.leftnav-list-item-highlighted):not(.leftnav-list-item-chosen):not(.leftnav-login-box):not(.leftnav-search-box){
     display: none;
 }
 
 .leftnav-menu-scrolling-list {
     color : $color-menu-item-text;
+    padding-top: 70px;
 }
 
 .leftnav-list-item-static.leftnav-list-item-chosen.subcat-header {
@@ -218,8 +204,8 @@ div {
 
 .leftnav-list-item-container .leftnav-list-item-selected {
     color     : $color-menu-item-selected-bg;
-    background: $color-theme-transparent $img-icon-leftnav no-repeat left 55px center;
-    background-size: 50px 60px;
+    background: $color-theme-transparent $img-icon-leftnav no-repeat left 50px center;
+    background-size: 50px 50px;
 }
 
 .leftnav-list-item-chosen {
@@ -241,10 +227,26 @@ div {
     color  : $color-menu-search-text;
     padding-left : 140px;
     outline-width: 0;
-    background: rgba(232, 232, 232, 0.0980392) url(assets/search.png) no-repeat scroll left 45px top 50% / 50px 60px padding-box border-box;
+    background: rgba(232, 232, 232, 0.0980392) $img-icon-search no-repeat scroll left 45px top 50% / 50px 60px padding-box border-box;
 }
 
 .leftnav-search-box .leftnav-list-item-highlighted {
+    color     : $color-menu-item-highlight-text;
+    border-color: $color-menu-item-highlight-text;
+    border-style: solid;
+    border-width: 1px 1px 1px 0px;
+}
+
+.leftnav-login-box {
+    border : none;
+    width  : 100%;
+    color  : $color-menu-search-text;
+    padding-left : 140px;
+    outline-width: 0;
+    background: rgba(232, 232, 232, 0.0980392) $img-icon-login no-repeat scroll left 45px top 50% / 50px 60px padding-box border-box;
+}
+
+.leftnav-login-box .leftnav-list-item-highlighted {
     color     : $color-menu-item-highlight-text;
     border-color: $color-menu-item-highlight-text;
     border-style: solid;
@@ -259,7 +261,7 @@ div {
     position : absolute;
     display  : none;
     top      : 300px;
-    left     : 200px;
+    right     : 300px;
     color    : $color-title-text;
     font-size: 3em;
 }
@@ -318,7 +320,6 @@ div {
     }
     .one-D-summary-description {
         color       : $color-description-text;
-        font-style  : italic;
         font-size   : 1.1em;
         align-items : center;
         @include display-box;
@@ -412,8 +413,6 @@ div {
         color: $color-overlay-text;
         text-align: center;
         vertical-align: center;
-        border-top: 1px solid $color-overlay-time-left;
-        border-left: 1px solid $color-overlay-time-left;
 }
 
 .shoveler-row-container {
@@ -687,7 +686,6 @@ div {
     width       : 40%;
     height   : 72px;
     color    : $color-description-text;
-    font-style: italic;
     font-size: 1.1em;
     overflow    : hidden;
     @include display-box;

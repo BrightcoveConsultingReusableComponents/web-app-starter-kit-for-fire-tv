@@ -19,7 +19,7 @@
 $img-app-background : url('assets/black_back.jpg') !default;
 //$img-app-background : url('assets/search.png') !default;
 $img-icon-leftnav   : url('assets/video_icon.png') !default;
-$img-icon-search    : url('assets/search.png') !default;
+$img-icon-search    : url('assets/search_icon.png') !default;
 $img-icon-search_2  : url('assets/search_icon.png') !default;
 $img-icon-video    : url('assets/menu2.png') !default;
 $img-icon-login    : url('assets/login_icon.png') !default;
@@ -55,8 +55,7 @@ $color-theme-transparent :  rgba(223,115,183, 0.6);
 $color-theme-box-shadow  : 0px 0px 20px 15px rgba(223,115,183, 0.5);
 $color-theme-border  :  0.5px rgba(223,115,183, 0.5);
 
-
-$color-app-base-bg   : #5a656f !default;
+$color-app-base-bg   : #42494F !default;
 $color-app-header-bg : rgba(#000000, 0.1) !default;
 
 $color-overlay-bg   : #000000 !default;
@@ -81,7 +80,8 @@ $color-meta-secondary-text: #b9bbbd !default;
 $color-description-text : #e8e8e8 !default;
 $color-box-shadow : rgba(0,0,0,0.44) !default;
 
-$color-menu-base-bg : rgba(#42494F, 0.9) !default;
+$color-menu-base-bg : rgba(#1a1d1f, 0.9) !default;
+//$color-menu-base-bg : rgba(#42494F, 0.9) !default;
 
 $color-menu-item-text :  #b9bbbd !default;
 $color-menu-item-bg: rgba(#e8e8e8, 0.1) !default;

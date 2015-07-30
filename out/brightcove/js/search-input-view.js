@@ -16,10 +16,11 @@
         Events.call(this, ['searchQueryEntered']);
         this.currentSearchQuery = null;
         this.$el = null;
+        this.isOnSearchMode = false;
         
         this.render = function ($parent) {
             var html = utils.buildTemplate($("#search-input-template"), {});
-  
+            this.parent = $parent;
             $parent.html(html);
 
             this.$el = $parent.children().eq(0);
@@ -32,7 +33,6 @@
           if(e.keyCode == 13){
             this.currentSearchQuery = e.target.value;
             this.trigger("searchQueryEntered");
-            console.log($('#search-input').html());
           }
         }.bind(this);
 
@@ -44,30 +44,27 @@
        this.changeToSearchView = function(e) {
             //change for search view
             if(e.target.value){
-              $('#left-nav').css('width', '120%');
+              this.isOnSearchMode = true;
+              $('#left-nav').css('width', '140%');
               $('#left-nav').css('height', '22%');
               $('#left-nav').css('top', '-150px');
-              $('#app-header-bar').hide();
-              $('#left-nav').css('width', '120%');
-              $('#left-nav').css('height', '22%');
-              $('#left-nav').css('top', '-150px');
+              $('.leftnav-menu-scrolling-list').css('padding-top', '0px');
               $('#app-header-bar').hide();
             }
        }.bind(this);
 
        this.changeToNormalView = function() {
+            this.isOnSearchMode = false;
             //normal position of search
             $('#app-header-bar').show();
             $('#left-nav').css('width', '840px');
             $('#left-nav').css('height', '1080px');
             $('#left-nav').css('top', 0);
-            $('.right-nav').show();
-            $('#search-input').css('background-color', 'rgba(232, 232, 232, 0.0980392)');
+            $('.leftnav-menu-scrolling-list').css('padding-top', '70px');
        }
 
        this.select = function () {
-            $('#search-input').css('background-image', 'url(assets/search.png)');
-            $('#search-input').css('background-color', 'rgba(223, 115, 183, 0.6)');
+            $('#search-input').css('background-image', 'url(assets/search_icon.png)');
             $('.right-nav').hide();
             this.$el.focus();
        }.bind(this);
@@ -77,8 +74,15 @@
             this.$el.val("");
        }.bind(this);
 
-       this.deselect = function () {
+       this.deselect = function (index) {
+            if(index){
+              if(index>1){
+                $('.right-nav').show();
+                $('#one-d-no-items').hide();
+              }
+            }
             this.changeToNormalView();
+            this.$el.val("");
             this.$el.blur();
        }.bind(this);
     }

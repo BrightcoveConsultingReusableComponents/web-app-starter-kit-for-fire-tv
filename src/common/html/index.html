@@ -46,8 +46,8 @@
            <div class="app-logo"><img src="{{img_logo}}" /></div>
            <div class="right-nav">
            <div id="right-nav-cover-image"></div>
-           <div id="right-nav-cover-title">OLAAAAA</div>
-           <div id="right-nav-cover-desc">AMIGOS</div>
+           <div id="right-nav-cover-title"></div>
+           <div id="right-nav-cover-desc"></div>
            </div>
        </div>
     </script>
@@ -56,9 +56,6 @@
     <script id="left-nav-template" type="text/x-handlebars-template">
         <div id="left-nav" class="leftnav-main-container">
             <div id="left-nav-list-container" class="leftnav-menulist-expanded">
-                <div id="left-icon-menu-list" class="left-nav-icon-menu">
-                 <div id="menu-video-icon"></div>
-                </div>
                 <div id="left-nav-scrolling-list" class="leftnav-menu-scrolling-list">
                     {{#each leftNavItems}}
                     <div class="leftnav-list-item-container">
@@ -72,10 +69,13 @@
         </div>
     </script>
     
+    <!-- Login Row View Template -->
+    <script id="login-input-template" type="text/x-handlebars-template">
+        <input id="login-input" class="leftnav-list-item-static leftnav-login-box" type="text" placeholder="Sign In"/>
+    </script>
     
     <!-- Search Row View Template -->
     <script id="search-input-template" type="text/x-handlebars-template">
-        <input id="search-input" class="leftnav-list-item-static leftnav-search-box" type="text" placeholder="Search"/>
         <input id="search-input" class="leftnav-list-item-static leftnav-search-box" type="text" placeholder="Search"/>
     </script>
 

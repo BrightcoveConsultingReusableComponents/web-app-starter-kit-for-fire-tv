@@ -170,6 +170,7 @@
          */
         this.genStack = function() {
             var e = Error();
+            console.log(e);
             return e.stack;
         };
 

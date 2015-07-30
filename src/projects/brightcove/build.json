@@ -35,6 +35,7 @@
         "playlist-player-view.js",
         "../../common/js/controls-view.js",
         "../../common/js/search-input-view.js",
+        "../../common/js/login-input-view.js",
         "../../common/js/model-brightcove.js",
         "../../common/js/app.js",
         "init.js"

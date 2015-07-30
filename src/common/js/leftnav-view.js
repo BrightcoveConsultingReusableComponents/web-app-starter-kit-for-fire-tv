@@ -67,6 +67,7 @@
         * Hide the left-nav overlay that covers the one-d-view
         */
         this.collapse = function () {
+            this.shiftNavScrollContainer(100);
             $('#one-D-shoveler-container').show();
             $('#one-D-summary-container').show();
             $('.right-nav').hide();
@@ -89,6 +90,7 @@
         * Show the left-nav overlay that covers the one-d-view
         */
         this.expand = function () {
+            this.shiftNavScrollContainer();
             //hide or show the respective elements
             $('#one-D-shoveler-container').hide();
             $('#one-D-summary-container').hide();
@@ -217,7 +219,7 @@
             this.$menuItems = $(CONTAINER_SCROLLING_LIST).children();
             for (i = 0; i < catData.length; i++) {
                 if (typeof catData[i] === "object") {
-                    catData[i].render(this.$menuItems.eq(i));   
+                    catData[i].render(this.$menuItems.eq(i));
                 }
             }
 
@@ -236,7 +238,6 @@
             touches.registerTouchHandler("leftnav-list-item-static", this.handleListItemSelection);
 
             this.collapse();
-
             //send loadComplete event
             this.trigger('loadComplete');
         };
@@ -340,6 +341,9 @@
             if(this.confirmedSelection !== this.currSelectedIndex) {
                 // switch the current view state to the main content view
                 var isObject = typeof this.leftNavItems[this.currSelectedIndex] === "object"; 
+                if (this.currSelectedIndex === 0){
+                    return;
+                }
                 var emptySearch = isObject && (this.leftNavItems[this.currSelectedIndex].currentSearchQuery === null || this.leftNavItems[this.currSelectedIndex].currentSearchQuery.length === 0);
                 if (emptySearch) {
                     return;
@@ -348,7 +352,7 @@
                 this.trigger('select', this.currSelectedIndex);
             } 
             else if (this.searchUpdated) {
-                this.trigger('select', this.currSelectedIndex);   
+                this.trigger('select', this.currSelectedIndex); 
             }
             else {
                 this.trigger('deselect');
@@ -364,7 +368,7 @@
 
             this.currentSelectionEle = this.$menuItems.eq(this.currSelectedIndex).children()[0];
             this.setSelectedElement(this.currentSelectionEle); 
-
+            
             this.shiftNavScrollContainer();
 
             //shade the elements farther away from the selection
@@ -374,13 +378,21 @@
        /**
         * Move the nav container as new items are selected
         */
-        this.shiftNavScrollContainer = function() {
+        this.shiftNavScrollContainer = function(limitIndex) {
             if(!this.translateAmount) {
                 this.translateAmount = this.currentSelectionEle.getBoundingClientRect().height + 2;
             }
 
+            if(!limitIndex){
+                var limitIndex = 5;
+            }
+
             //shift the nav as selection changes
-            var translateHeight = 0 - (this.translateAmount * this.currSelectedIndex);
+            if(this.currSelectedIndex>limitIndex){
+                var translateHeight = 0 - (this.translateAmount * (this.currSelectedIndex - limitIndex));
+            } else{
+                var translateHeight = 0 - (this.translateAmount);
+            }
             this.scrollingContainerEle.style.webkitTransform = "translateY(" + translateHeight + "px)";
         };
 
