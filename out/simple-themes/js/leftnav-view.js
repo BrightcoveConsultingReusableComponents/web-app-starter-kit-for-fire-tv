@@ -98,21 +98,48 @@
             //change the image, title, desc for the right nav playlist cover
             setTimeout(function(){
                 //get variables
-                var id = $('.shoveler-row-container').children().first().attr('id');
-                var img = $('#'+id).find('img');
-                var src = img.attr("src");
-                var url = "url('"+src+"')";
-                var playlistTitle = String($('.leftnav-list-item-selected').text()).trim();
-                var playlistLength = $('.shoveler-row-container').children().length;
+                var currentData;
+                var callback = function(categoryData){
+                    var currentData = categoryData;
+                    var id = $('.shoveler-row-container').children().first().attr('id');
+                    var img = $('#'+id).find('img');
+                    var src = img.attr("src");
+                    var url = "url('"+src+"')";
+                    var playlistTitle = String($('.leftnav-list-item-selected').text()).trim();
+                    var playlistLength = currentData.length;
 
-                if(src){
-                    $('.right-nav').show();
-                    $('#right-nav-cover-image').css("background-image", url);
-                    $('#right-nav-cover-title').text(playlistTitle);
-                    $('#right-nav-cover-desc').text(playlistLength + " videos");
-                } else{
-                    $('.right-nav').hide();
+                    var playlistDuration = 0;
+                    for(var i=0; i<playlistLength; i++){
+                        playlistDuration += Math.floor(currentData[i].length/1000);
+                    }
+
+                    //console.log(app.data.getCategoryData(app.data.currentCategory));
+                    if(src){
+                        $('.right-nav').show();
+                        $('.right-nav').css('display', 'block');
+                        $('#right-nav-cover-image').css("background-image", url);
+                        $('#right-nav-cover-title').text(playlistTitle);
+                        $('#right-nav-cover-desc').text(playlistLength + " videos" + getHoursAndMinutes(playlistDuration));
+                    } else{
+                        $('.right-nav').hide();
+                    }
+
+                    function getHoursAndMinutes(seconds) {
+                        var hours = Math.floor( seconds / 3600 );
+                        var minutes = Math.floor( seconds / 60 ) % 60;
+                        seconds = Math.floor( seconds % 60 );
+
+                        if(hours){
+                            return ", "+hours+"h"+minutes+"min";
+                        } else if(minutes){
+                            return ", "+minutes+"min";
+                        } else{
+                            return "";
+                        }
+                    };
                 }
+                app.data.getCategoryData(callback);
+
             }, 250);
 
             this.leftNavContainerEle.classList.remove('leftnav-menulist-collapsed');

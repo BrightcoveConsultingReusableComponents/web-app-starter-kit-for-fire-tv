@@ -55,6 +55,7 @@
          * @param {Object} startIndex the index corresponding to the data to be rendered
          */
         this.render = function($el, items, startIndex) {
+            console.log('rendou');
             if (!this.previewTime) {
                 this.previewTime = this.PREVIEW_TIME_DEFAULT;
             }

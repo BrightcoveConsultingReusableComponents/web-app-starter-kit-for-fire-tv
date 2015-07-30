@@ -220,11 +220,30 @@
                 var url = "url('"+src+"')";
                 var playlistTitle = String($('.leftnav-list-item-selected').text()).trim();
                 var playlistLength = categoryData.length;
-
+                
+                var playlistDuration = 0;
+                for(var i=0; i<playlistLength; i++){
+                    playlistDuration += Math.floor(categoryData[i].length/1000);
+                }
                 //image, title and extra information about the playlist
                 $('#right-nav-cover-image').css("background-image", url);
                 $('#right-nav-cover-title').text(playlistTitle);
-                $('#right-nav-cover-desc').text(playlistLength + " videos");
+                $('#right-nav-cover-desc').text(playlistLength + " videos" + getHoursAndMinutes(playlistDuration));
+
+                function getHoursAndMinutes(seconds) {
+                    var hours = Math.floor( seconds / 3600 );
+                    var minutes = Math.floor( seconds / 60 ) % 60;
+                    seconds = Math.floor( seconds % 60 );
+
+                    if(hours){
+                        return ", "+hours+"h"+minutes+"min";
+                    } else if(minutes){
+                        return ", "+minutes+"min";
+                    } else{
+                        return "";
+                    }
+                };
+
             }
 
             leftNavView.on('changeCover', function(index) {
@@ -607,7 +626,6 @@
         */
         this.transitionToLeftNavView = function() {
             this.selectView(this.leftNavView);
-            $('.shoveler-play-button').hide();
             this.leftNavView.expand();
             //change size of selected shoveler item 
             this.oneDView.shrinkShoveler();

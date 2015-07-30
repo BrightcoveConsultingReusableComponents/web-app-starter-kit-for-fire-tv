@@ -320,7 +320,7 @@
             return appSettings.dataURL + '?command=find_playlist_by_id' +
                 '&playlist_id=' + playlist_id +
                 '&playlist_fields=id%2CreferenceId%2Cname%2CshortDescription%2CplayListType%2Cvideos' +
-                '&video_fields=id%2Cname%2ClongDescription%2CvideoStillURL%2CthumbnailURL%2CpublishedDate&media_delivery=default' +
+                '&video_fields=id%2Cname%2ClongDescription%2CvideoStillURL%2CthumbnailURL%2CpublishedDate%2Clength&media_delivery=default' +
                 '&token=' + appSettings.developerToken;
         };
 
@@ -393,6 +393,7 @@
                 title: data.name,
                 description: data.longDescription,
                 pubDate: exports.utils.formatDate(data.publishedDate/1000),
+                length: data.length,
                 imgURL: data.videoStillURL,
                 thumbURL: data.thumbnailURL,
                 videoURL: data.videoId

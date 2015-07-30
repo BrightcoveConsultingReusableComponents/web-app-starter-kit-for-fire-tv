@@ -108,7 +108,6 @@
          * @param {string} set the new description
          */
         this.updateTitleAndDescription = function(title, description) {
-            console.log('q')
             this.$containerControls.find(".player-controls-content-title").text(title);
             this.$containerControls.find(".player-controls-content-subtitle").text(this.truncateSubtitle(description));
         }.bind(this);

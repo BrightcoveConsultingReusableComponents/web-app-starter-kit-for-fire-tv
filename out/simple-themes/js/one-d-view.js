@@ -324,7 +324,6 @@
          */
         this.showExtraData = function (index) {
             index = index || 0;
-            $('.shoveler-play-button').show();
             //add description
             this.$el.find(".one-D-summary-title").html(this.rowElements[index].title);
             this.$el.find(".one-D-summary-description").html(this.rowElements[index].description);
@@ -344,29 +343,43 @@
             }
             else {
                 if (this.rowElements[index].pubDate) {
-                    this.$el.find(".one-D-summary-pubdate").html(this.rowElements[index].pubDate.toLocaleString());
-                    this.$el.find(".shoveler-play-button").html(getDateDifference(this.rowElements[index].pubDate.toLocaleString()));
+                    this.$el.find(".one-D-summary-pubdate").html('Published '+this.getDateDifference(this.rowElements[index].pubDate.toLocaleString()));
+                    this.$el.find(".shoveler-duration").html(this.convertSecondsToHHMMSS(Math.floor(this.rowElements[index].length/1000)));
                 }
                 this.$el.find(".one-D-summary-description").css("margin-top", "");
             }
 
-            function  getDateDifference(date) {
+        };
+
+        this.convertSecondsToHHMMSS = function(seconds, alwaysIncludeHours) {
+            var hours = Math.floor( seconds / 3600 );
+            var minutes = Math.floor( seconds / 60 ) % 60;
+            seconds = Math.floor( seconds % 60 );
+
+            var finalString = "";
+
+            if (hours > 0 || alwaysIncludeHours) {
+                finalString += hours + ":";
+            }
+            return finalString + ('00' + minutes).slice(-2) + ":" + ('00' + seconds).slice(-2);
+        };
+
+        this.getDateDifference = function(date) {
                 var today = convertToDate(getCurrentDate());
                 var video_date = convertToDate(date);
                 var dif = getDiff(today, video_date);
                 var dateDifference = convertToTimeString(dif);
                 return dateDifference;
-            }
-
+    
             function convertToDate(date) {
                 var convert = new Date(Date.parse(String(date)));
                 return convert;
-            }
+            };
 
             function getDiff(date1, date2) {
                 var dif = date2 - date1;
                 return Math.abs(dif);
-            }
+            };
 
             function convertToTimeString(temp) {
                 var result = divisionOfTime(temp);
@@ -413,7 +426,7 @@
                 } else{
                     return null;
                 }
-            }
+            };
 
             function divisionOfTime(temp) {
                 var result;
@@ -457,7 +470,7 @@
 
                 result = ['now'];
                 return result;
-            }
+            };
 
             function getCurrentDate() {
                 var currentdate = new Date(); 
@@ -468,7 +481,7 @@
                             + currentdate.getMinutes() + ":" 
                             + currentdate.getSeconds();
                 return datetime;
-            }
+            };
         };
 
         /**
@@ -479,7 +492,6 @@
             this.$el.find(".one-D-summary-pubdate").text("");
             this.$el.find(".one-D-summary-description").text("");
             this.$el.find("#summary-buttons-container").css("visibility", "hidden" );
-            $('.shoveler-play-button').hide();
         };
     }
 

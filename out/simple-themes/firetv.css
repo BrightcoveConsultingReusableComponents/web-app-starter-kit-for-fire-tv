@@ -110,12 +110,12 @@ div {
     height: 100%; }
 
 .right-nav {
+  position: absolute;
+  top: 175px;
+  left: 750px;
   display: none; }
 
 #right-nav-cover-image {
-  position: absolute;
-  top: 175px;
-  left: 875px;
   width: 950px;
   height: 630px;
   background-color: white;
@@ -127,10 +127,6 @@ div {
   border: 90px rgba(223, 115, 183, 0.6); }
 
 #right-nav-cover-title {
-  position: absolute;
-  top: 820px;
-  width: 50.5%;
-  right: 91px;
   text-align: center;
   color: #B3DAF2;
   line-height: 1.4;
@@ -155,10 +151,6 @@ div {
   line-clamp: 1; }
 
 #right-nav-cover-desc {
-  position: absolute;
-  top: 925px;
-  width: 50.5%;
-  right: 91px;
   text-align: center;
   color: #B3DAF2;
   font-weight: 200;
@@ -202,7 +194,7 @@ div {
 .leftnav-menulist-collapsed .leftnav-list-item-static {
   background-color: transparent;
   border: none;
-  opacity: 0.5; }
+  opacity: 0.7; }
 
 .leftnav-menulist-collapsed .leftnav-list-item-static:not(.leftnav-list-item-highlighted):not(.leftnav-list-item-chosen):not(.leftnav-login-box):not(.leftnav-search-box) {
   display: none; }
@@ -370,9 +362,9 @@ div {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;
     box-orient: vertical;
-    -webkit-line-clamp: 1;
-    -moz-line-clamp: 1;
-    line-clamp: 1; }
+    -webkit-line-clamp: 2;
+    -moz-line-clamp: 2;
+    line-clamp: 2; }
   .one-D-details-summary-text .one-D-summary-pubdate {
     font-weight: 200;
     height: 30px;
@@ -479,14 +471,14 @@ div {
   -moz-transition-timing-function: linear;
   transition-timing-function: linear; }
 
-.shoveler-play-button {
-  display: none;
+.shoveler-rowitem-selected .shoveler-duration {
   position: absolute;
-  bottom: 410px;
-  right: 31.1%;
-  width: 200px;
+  bottom: 325px;
+  right: 15px;
+  width: 160px;
   height: 35px;
   z-index: 700;
+  font-size: 1.1em;
   background-color: rgba(223, 115, 183, 0.6);
   color: #FFFFFF;
   text-align: center;
@@ -589,8 +581,7 @@ div {
   border: 1px solid rgba(223, 115, 183, 0.6);
   margin-top: -1px;
   border-radius: 6px;
-  background-color: rgba(223, 115, 183, 0.6);
-  margin-left: -0.6%; }
+  background-color: rgba(223, 115, 183, 0.6); }
 
 .player-controls-timeline-thumb {
   position: absolute;
@@ -601,7 +592,7 @@ div {
   border-radius: 9999px;
   background-color: white;
   opacity: 1;
-  margin-left: -2.7%; }
+  margin-left: -0.5%; }
 
 .player-controls-skip-indicator {
   position: absolute;
@@ -670,17 +661,21 @@ div {
   display: block;
   background: linear-gradient(to top, black, transparent 85%, transparent 100%); }
 
+.player-controls-text {
+  position: absolute;
+  display: block;
+  overflow: auto;
+  top: 820px;
+  left: 285px;
+  width: 60%; }
+
 .player-controls-content-image {
   position: absolute;
   bottom: 110px;
   left: 30px;
   height: 135px;
   width: 198px;
-  color: #B3DAF2;
-  font-size: 1.8em;
-  font-family: "Helvetica Neue Medium", "HelveticaNeue-Medium", Helvetica, Arial, sans-serif;
   margin-top: 20px;
-  overflow: hidden;
   display: -webkit-box;
   /* NEW - Chrome */
   display: -moz-box;
@@ -698,9 +693,43 @@ div {
   background-position: center;
   background-repeat: no-repeat; }
 
+.player-controls-content-title {
+  height: auto;
+  color: rgba(223, 115, 183, 0.6);
+  font-size: 1.6em;
+  font-family: "Helvetica Neue Medium", "HelveticaNeue-Medium", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 1;
+  -moz-line-clamp: 1;
+  line-clamp: 1; }
+
+.player-controls-content-subtitle {
+  height: auto;
+  color: #FFFFFF;
+  font-size: 1.1em;
+  padding-top: 7px;
+  overflow: hidden;
+  display: -webkit-box;
+  /* NEW - Chrome */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: box;
+  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 2;
+  -moz-line-clamp: 2;
+  line-clamp: 2; }
+
 .watermark {
   position: absolute;
-  bottom: 85px;
+  bottom: 120px;
   right: 120px;
   height: 145px;
   width: 145px;
@@ -722,56 +751,6 @@ div {
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 9999px; }
-
-.player-controls-content-title {
-  position: absolute;
-  bottom: 190px;
-  left: 285px;
-  height: 59px;
-  width: 40%;
-  color: rgba(223, 115, 183, 0.6);
-  font-size: 1.8em;
-  font-family: "Helvetica Neue Medium", "HelveticaNeue-Medium", Helvetica, Arial, sans-serif;
-  margin-top: 20px;
-  overflow: hidden;
-  display: -webkit-box;
-  /* NEW - Chrome */
-  display: -moz-box;
-  /* OLD - Firefox 19- (buggy but mostly works) */
-  display: -ms-flexbox;
-  /* TWEENER - IE 10 */
-  display: box;
-  /* NEW, Spec - Opera 12.1, Firefox 20+ */
-  -webkit-box-orient: vertical;
-  -moz-box-orient: vertical;
-  box-orient: vertical;
-  -webkit-line-clamp: 1;
-  -moz-line-clamp: 1;
-  line-clamp: 1; }
-
-.player-controls-content-subtitle {
-  position: absolute;
-  bottom: 122px;
-  left: 285px;
-  width: 40%;
-  height: 72px;
-  color: #FFFFFF;
-  font-size: 1.1em;
-  overflow: hidden;
-  display: -webkit-box;
-  /* NEW - Chrome */
-  display: -moz-box;
-  /* OLD - Firefox 19- (buggy but mostly works) */
-  display: -ms-flexbox;
-  /* TWEENER - IE 10 */
-  display: box;
-  /* NEW, Spec - Opera 12.1, Firefox 20+ */
-  -webkit-box-orient: vertical;
-  -moz-box-orient: vertical;
-  box-orient: vertical;
-  -webkit-line-clamp: 2;
-  -moz-line-clamp: 2;
-  line-clamp: 2; }
 
 .player-pause-button {
   display: none;
@@ -821,18 +800,6 @@ div {
     box-shadow: 0px 0px 20px 15px rgba(223, 115, 183, 0.5);
     border: 0.5px rgba(223, 115, 183, 0.5);
     border-radius: 9999px; }
-
-.next-video-thumbnail:after {
-  display: none;
-  /*position : relative;
-    top      : -250px;
-    height   : 100%;
-    width    : 100%;
-    z-index  : 90;
-    content  : " ";
-    background-position : center;
-    background-repeat   : no-repeat;
-    background-image    : $img-nextvideo-preview-play;*/ }
 
 .next-video-playingtext {
   margin-left: 50px;

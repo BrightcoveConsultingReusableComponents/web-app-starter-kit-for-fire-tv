@@ -100,7 +100,6 @@
     <!-- 1D View Template  -->
     <script id="one-D-view-items-template" type="text/x-handlebars-template">
         <div id="one-D-view-item-elements" class="one-D-details-container">
-            <div class = "shoveler-play-button">just now</div>
             <div id="one-d-no-items" class="one-d-no-items-container">No content found.</div>
             <div id="one-D-shoveler-container"></div>
             <div id="one-D-summary-container" class="one-D-details-summary-text">
@@ -117,6 +116,7 @@
         <div id="shoveler-view" class="shoveler-row-container">
             {{#each items}}
             <div id="{{id}}" class="shoveler-rowitem-static">
+            <div class = "shoveler-duration"></div>
             </div>
             {{/each}}
         </div>
@@ -134,13 +134,12 @@
     <!-- Next Video View Template  -->
     <script id="next-video-view-template" type="text/x-handlebars-template">
         <div id="next-video-view" class="next-video-main-container">
-            <div class = "next-video-text">UP NEXT</div>
+            <div class = "next-video-text"></div>
             <div class = "next-video-description">{{description}}</div>
             <div class = "next-video-thumbnail"><img src="{{thumbURL}}"></div>
             <div class = "next-video-playingtext">
                 <span id = "next-video-upnext"> Up next in </span>
                 <span id = "next-video-starttext" class = "next-video-starttext">30 </span>
-                seconds 
             </div>
             <div class = "next-video-title">{{title}}</div>
         </div>
@@ -158,8 +157,10 @@
             <img class="player-pause-indicator" src="assets/btn_pause.png"/>
         </div>
         <div class="player-controls-content-image"></div>
+        <div class="player-controls-text">
         <div class="player-controls-content-title">Content Title</div>
         <div class="player-controls-content-subtitle">Subtitle</div>
+        </div>
         <div class="watermark"></div>
         <div class="player-controls-container">
             <div class="player-controls-timeline-container">
