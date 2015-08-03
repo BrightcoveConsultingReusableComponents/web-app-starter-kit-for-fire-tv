@@ -234,7 +234,7 @@
             return appSettings.dataURL + '?command=find_all_playlists' +
                 '&page_size=' + appSettings.numberOfCategories +
                 '&playlist_fields=id%2CreferenceId%2Cname%2CshortDescription' +
-                '&video_fields=id%2Cname%2ClongDescription%2CpublishedDate' +
+                '&video_fields=id%2Cname%2ClongDescription%2CpublishedDate%2Clength' +
                 '&media_delivery=default&page_number=0&get_item_count=true' +
                 '&token=' + appSettings.developerToken;
         };
@@ -365,7 +365,7 @@
          */
         this.searchVideosRequestUrl = function(searchTerm) {
             return appSettings.dataURL + '?command=search_videos&any=' + searchTerm + '&page_size=30' +
-                '&video_fields=id%2Cname%2ClongDescription%2CvideoStillURL%2CthumbnailURL%2CpublishedDate' +
+                '&video_fields=id%2Cname%2ClongDescription%2CvideoStillURL%2CthumbnailURL%2CpublishedDate%2Clength' +
                 '&media_delivery=default&sort_by=DISPLAY_NAME%3AASC&page_number=0' +
                 '&token=' + appSettings.developerToken;
         };

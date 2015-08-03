@@ -353,7 +353,12 @@
                         app.data.setCurrentCategory(index);
                     }
                     if (this.showSearch) {
-                        this.searchInputView.deselect(index);
+                        if(this.searchInputView.searchFromShoveler){
+                            this.searchInputView.deselect(index);
+                            this.transitionFromLefNavToOneD();
+                        } else{
+                            this.searchInputView.deselect(index); 
+                        }
                     }
                 }
 
@@ -428,8 +433,17 @@
                         this.transitionToEntitlementView();
                     }
                 } 
-                else {
-                    this.transitionToLeftNavView();
+                else { 
+                    if(dir){
+                        this.transitionToLeftNavView();
+                    } else{
+                        this.searchInputView.select();
+                        this.leftNavView.currSelectedIndex = 1;
+                        this.leftNavView.selectLeftNavItem();
+                        this.transitionToLeftNavView();
+                        this.searchInputView.changeToSearchView();
+                        this.searchInputView.searchFromShoveler = true;
+                    }
                 }
             }, this);
 

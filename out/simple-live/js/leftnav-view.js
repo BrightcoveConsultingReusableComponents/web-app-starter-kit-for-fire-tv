@@ -113,8 +113,8 @@
                         playlistDuration += Math.floor(currentData[i].length/1000);
                     }
 
-                    //console.log(app.data.getCategoryData(app.data.currentCategory));
-                    if(src){
+                    var view = app.currentView.constructor.name;
+                    if(src && playlistTitle && view === 'LeftNavView'){
                         $('.right-nav').show();
                         $('.right-nav').css('display', 'block');
                         $('#right-nav-cover-image').css("background-image", url);
@@ -144,8 +144,7 @@
 
             this.leftNavContainerEle.classList.remove('leftnav-menulist-collapsed');
             this.leftNavContainerEle.classList.add('leftnav-menulist-expanded');
-
-            //set the selected item style
+    
             this.setSelectedElement(); 
 
             //set flag to true
@@ -164,7 +163,6 @@
         */
         this.setSelectedElement = function (ele) {
             ele = ele || this.currentSelectionEle;
-
             //remove chosen class if it's there
             if($(ele).hasClass(CLASS_MENU_ITEM_CHOSEN)) {
                 $(ele).removeClass(CLASS_MENU_ITEM_CHOSEN);
@@ -255,7 +253,6 @@
             this.currentSelectionEle   = this.$menuItems.eq(this.currSelectedIndex).children()[0];
             this.scrollingContainerEle = $(CONTAINER_SCROLLING_LIST)[0];
             this.leftNavContainerEle   = $(CONTAINER_MAIN)[0];
-
             //set default selected item 
             this.setSelectedElement(this.currentSelectionEle); 
             

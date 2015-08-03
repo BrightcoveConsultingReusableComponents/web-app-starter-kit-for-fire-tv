@@ -66,6 +66,7 @@
             if (this.eventSet && this.eventSet.indexOf(event) === -1) {
                 throw "Unknown event: " + event;
             }
+            //console.log(event);
             var handlers = this.eventHandlers[event];
             if (handlers) {
                 for (var i = 0; i < handlers.length; i++) {

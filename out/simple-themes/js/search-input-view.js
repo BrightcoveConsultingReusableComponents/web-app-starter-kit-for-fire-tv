@@ -17,6 +17,7 @@
         this.currentSearchQuery = null;
         this.$el = null;
         this.isOnSearchMode = false;
+        this.searchFromShoveler = false;
         
         this.render = function ($parent) {
             var html = utils.buildTemplate($("#search-input-template"), {});
@@ -43,7 +44,7 @@
 
        this.changeToSearchView = function(e) {
             //change for search view
-            if(e.target.value){
+            if(!e || e.target.value){
               this.isOnSearchMode = true;
               $('#left-nav').css('width', '140%');
               $('#left-nav').css('height', '22%');
@@ -80,6 +81,9 @@
                 $('.right-nav').show();
                 $('#one-d-no-items').hide();
               }
+            }
+            if(this.searchFromShoveler){
+              this.searchFromShoveler = false;
             }
             this.changeToNormalView();
             this.$el.val("");
