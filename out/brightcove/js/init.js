@@ -8,9 +8,9 @@
         PlaylistView: PlaylistPlayerView,
         dataURL: "https://api.brightcove.com/services/library",
         numberOfCategories: 30,
-        developerToken: "6gVxMdyXfHwO2-c0Oe4_zt4ZZN0DK1tUHueUuTA6okLxHnxNGn354w..",
-        accountID: "3986618082001",
-        playerID: "115d0726-53ff-4cd9-8a5d-c68ea10d3ea2",
+        developerToken: "-FqR1GflweyUTwuFeGR94fLc_tSL4ajzdIWBr8UvwZSiJzvXGyI_dw..",
+        accountID: "4368278020001",
+        playerID: "68c11549-de3c-41e9-b3bb-dfdb1bcdac97",
         showSearch: true,
         displayButtons: false
     };

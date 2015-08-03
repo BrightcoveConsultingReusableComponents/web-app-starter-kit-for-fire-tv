@@ -46,7 +46,7 @@
         //wrap in a timer to make sure the height and width are updated
         setTimeout(function() {
             if(window.innerWidth < window.innerHeight) {
-                $('#overlay-message').html('please rotate your device back to landscpe');
+                $('#overlay-message').html('please rotate your device back to landscape');
                 $('#app-overlay').css('display', 'block'); 
             } 
             else {
@@ -212,7 +212,8 @@
                 this.loginInputView = new LoginInputView();
             }
             
-            var makePlaylistCover = function(categoryData) {
+            //Call back to change the right-center image cover for each of the playlists
+            var changePlaylistImgCover = function(categoryData) {
                 //getting the variables to the playlist cover variables
                 var firstKey = Object.keys(categoryData)[0];
                 var src = categoryData[firstKey].imgURL;
@@ -225,20 +226,26 @@
                 for(var i=0; i<playlistLength; i++){
                     playlistDuration += Math.floor(categoryData[i].length/1000);
                 }
+
                 //image, title and extra information about the playlist
                 $('#right-nav-cover-image').css("background-image", url);
                 $('#right-nav-cover-title').text(playlistTitle);
                 $('#right-nav-cover-desc').text(playlistLength + " videos" + getHoursAndMinutes(playlistDuration));
 
+                //auxiliar function to get hours and minutes from video length in seconds
                 function getHoursAndMinutes(seconds) {
                     var hours = Math.floor( seconds / 3600 );
                     var minutes = Math.floor( seconds / 60 ) % 60;
                     seconds = Math.floor( seconds % 60 );
 
-                    if(hours){
+                    if(hours && minutes){
                         return ", "+hours+"h"+minutes+"min";
+                    } else if(hours) {
+                        return ", "+hours+"h";
                     } else if(minutes){
                         return ", "+minutes+"min";
+                    } else if(seconds) {
+                        return ", "+seconds+"s";
                     } else{
                         return "";
                     }
@@ -246,8 +253,12 @@
 
             }
 
-            leftNavView.on('changeCover', function(index) {
-                app.data.getCategoryData(makePlaylistCover);
+            /**
+            * Event Handler - Change the cover image when one of the items is chosen
+            * @param {none}
+            */
+            leftNavView.on('changeCover', function() {
+                app.data.getCategoryData(changePlaylistImgCover);
             })
 
            /**
@@ -266,6 +277,7 @@
                     this.loadingSpinner.show.spinner();
 
                     //set the newly selected category index
+                    //it's - 2 because we don't count the sign in and search items
                     if(this.showSearch) { index=index-2;}
                     app.data.setCurrentCategory(index);
 
@@ -347,6 +359,7 @@
                     this.loginInputView.deselect();
                 } else {
                     if (this.showSearch) {
+                    //it's - 2 because we don't count the sign in and search items
                         app.data.setCurrentCategory(index - 2);
                     } 
                     else {
@@ -376,8 +389,10 @@
             var leftNavData = app.data.getCategoryItems().slice(0);
             var startIndex = 0;
             if (this.showSearch) {
+                //load login and search views
                 leftNavData.unshift(this.searchInputView);
                 leftNavData.unshift(this.loginInputView);
+                //we start after the search index
                 startIndex = 2;
             }
 
@@ -437,6 +452,7 @@
                     if(dir){
                         this.transitionToLeftNavView();
                     } else{
+                        //turn to expanded search mode
                         this.searchInputView.select();
                         this.leftNavView.currSelectedIndex = 1;
                         this.leftNavView.selectLeftNavItem();

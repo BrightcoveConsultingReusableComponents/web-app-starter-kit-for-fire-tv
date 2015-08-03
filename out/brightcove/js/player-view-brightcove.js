@@ -14,7 +14,9 @@
     function BrightcovePlayerView(settings) {
         // mixin inheritance, initialize this as an event handler for these events:
         Events.call(this, ['exit', 'videoStatus', 'videoError', 'indexChange', 'error']);
-
+        
+        //timer for timeout event to hide controls
+        this.playTimer = null;
         //jquery variables
         this.$el = null;
         this.$currSeekTime = null;
@@ -133,12 +135,8 @@
          * @description Handles video element pause event
          */
         this.pauseEventHandler = function() {
-            $(".player-back-button").attr("src","assets/btn_player.png");
-            $(".watermark").show();
-            $(".gradient-to-bottom").show();
-            $(".player-controls-content-image").show();
-            $(".player-controls-content-title").show();
-            $(".player-controls-content-subtitle").show();
+            this.showCustomControls();
+            clearTimeout(this.playTimer);
             // we trigger the video status in the pause event handler because the pause event can come from the system
             // specifically it can be caused by the voice search functionality of Fire OS
 
@@ -155,12 +153,7 @@
         }.bind(this);
 
         this.playEventHandler = function() {
-            $(".player-back-button").attr("src","assets/btn_pause.png");
-            $(".watermark").hide();
-            $(".gradient-to-bottom").hide();
-            $(".player-controls-content-image").hide();
-            $(".player-controls-content-title").hide();
-            $(".player-controls-content-subtitle").hide();
+            this.hideCustomControls();
             this.clearTimeouts();
             this.setTimeouts();
         }.bind(this);
@@ -314,7 +307,7 @@
         this.show = function() {
             this.$el.css("visibility", "");
             if (this.durationFound) {
-                this.controlsView.showAndHideControls();
+                this.showAndHideControls();
             }
         };
 
@@ -346,6 +339,7 @@
          * @param {Object} index the index corresponding to the data to be rendered
          */
         this.render = function($container, data, index) {
+
             // Build the main content template and add it
             this.items = data;
             var video_data = data[index];
@@ -416,7 +410,45 @@
             this.setTimeouts();
             this.knownPlayerErrorTriggered = false;
 
+            //load the control after all the html is loaded
+            this.playControls = $('.player-controls-container')[0];
+
         }.bind(this);
+
+        /**
+         * @function Show Custom Controls
+         * @description Show all the custom control icons, images and container
+         */
+        this.showCustomControls = function() {
+            $(".player-back-button").attr("src","assets/btn_player.png");
+            $(".watermark").show();
+            $(".gradient-to-bottom").show();
+            $(".player-controls-content-image").show();
+            $(".player-controls-content-title").show();
+            $(".player-controls-content-subtitle").show();
+        }
+
+        /**
+         * @function Hide Custom Controls
+         * @description Hide all the custom control icons, images and container
+         */
+        this.hideCustomControls = function() {
+            $(".player-back-button").attr("src","assets/btn_pause.png");
+            $(".watermark").hide();
+            $(".gradient-to-bottom").hide();
+            $(".player-controls-content-image").hide();
+            $(".player-controls-content-title").hide();
+            $(".player-controls-content-subtitle").hide();
+            this.showAndHideControls();
+        }
+
+        this.showAndHideControls = function() {
+            this.playControls.style.opacity = "0.99";
+            clearTimeout(this.playTimer);
+            this.playTimer = setTimeout(function() {
+                 this.playControls.style.opacity = "0";
+            }.bind(this), 3000);
+        };
 
         /**
          * @function pauseAd
@@ -614,7 +646,7 @@
                         this.handlePlayPauseButton();
                         break;
                     case buttons.UP:
-                        this.controlsView.showAndHideControls();
+                        this.showAndHideControls();
                         break;
                     case buttons.DOWN:
                         if (this.brightcovePlayer && !this.brightcovePlayer.paused()) {

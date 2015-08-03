@@ -68,9 +68,8 @@
         */
         this.collapse = function () {
             this.shiftNavScrollContainer(100);
-            $('#one-D-shoveler-container').show();
-            $('#one-D-summary-container').show();
-            $('.right-nav').hide();
+            this.showOneDContainer();
+            this.rightNav.hide();
 
             //change container to the collapsed class
             this.leftNavContainerEle.classList.remove('leftnav-menulist-expanded');
@@ -91,56 +90,11 @@
         */
         this.expand = function () {
             this.shiftNavScrollContainer();
-            //hide or show the respective elements
-            $('#one-D-shoveler-container').hide();
-            $('#one-D-summary-container').hide();
+            //hide the oneD elements
+            this.hideOneDContainer();
             
             //change the image, title, desc for the right nav playlist cover
-            setTimeout(function(){
-                //get variables
-                var currentData;
-                var callback = function(categoryData){
-                    var currentData = categoryData;
-                    var id = $('.shoveler-row-container').children().first().attr('id');
-                    var img = $('#'+id).find('img');
-                    var src = img.attr("src");
-                    var url = "url('"+src+"')";
-                    var playlistTitle = String($('.leftnav-list-item-selected').text()).trim();
-                    var playlistLength = currentData.length;
-
-                    var playlistDuration = 0;
-                    for(var i=0; i<playlistLength; i++){
-                        playlistDuration += Math.floor(currentData[i].length/1000);
-                    }
-
-                    var view = app.currentView.constructor.name;
-                    if(src && playlistTitle && view === 'LeftNavView'){
-                        $('.right-nav').show();
-                        $('.right-nav').css('display', 'block');
-                        $('#right-nav-cover-image').css("background-image", url);
-                        $('#right-nav-cover-title').text(playlistTitle);
-                        $('#right-nav-cover-desc').text(playlistLength + " videos" + getHoursAndMinutes(playlistDuration));
-                    } else{
-                        $('.right-nav').hide();
-                    }
-
-                    function getHoursAndMinutes(seconds) {
-                        var hours = Math.floor( seconds / 3600 );
-                        var minutes = Math.floor( seconds / 60 ) % 60;
-                        seconds = Math.floor( seconds % 60 );
-
-                        if(hours){
-                            return ", "+hours+"h"+minutes+"min";
-                        } else if(minutes){
-                            return ", "+minutes+"min";
-                        } else{
-                            return "";
-                        }
-                    };
-                }
-                app.data.getCategoryData(callback);
-
-            }, 250);
+            setTimeout(this.setCurrentCategoryCover, 250);
 
             this.leftNavContainerEle.classList.remove('leftnav-menulist-collapsed');
             this.leftNavContainerEle.classList.add('leftnav-menulist-expanded');
@@ -155,6 +109,78 @@
                 // TODO: Find out why this is and get a better solution.
                 setTimeout(this.leftNavItems[this.currSelectedIndex].select, 200);
             }
+        };
+
+        /**
+        * Creates the category cover image/description on the right side of the screen
+        * @param category data from API call
+        */
+        this.setCurrentCategoryCover = function(){
+            var currentData;
+            //Set the callback to get the necessary variables and create a cover image and description for the playlist
+            var callback = function(categoryData){
+                var currentData = categoryData;
+                var id = $('.shoveler-row-container').children().first().attr('id');
+                var img = $('#'+id).find('img');
+                var src = img.attr("src");
+                var url = "url('"+src+"')";
+                var playlistTitle = String($('.leftnav-list-item-selected').text()).trim();
+                var playlistLength = currentData.length;
+
+                var playlistDuration = 0;
+                for(var i=0; i<playlistLength; i++){
+                    playlistDuration += Math.floor(currentData[i].length/1000);
+                }
+
+                var view = app.currentView.constructor.name;
+                if(src && playlistTitle && view === 'LeftNavView'){
+                    $('.right-nav').show();
+                    $('#right-nav-cover-image').css("background-image", url);
+                    $('#right-nav-cover-title').text(playlistTitle);
+                    $('#right-nav-cover-desc').text(playlistLength + " videos" + getLength(playlistDuration));
+                } else{
+                    $('.right-nav').hide();
+                }
+                
+                //Get hours, minutes, seconds for the current video and return the best string to represent it
+                function getLength(seconds) {
+                    var hours = Math.floor( seconds / 3600 );
+                    var minutes = Math.floor( seconds / 60 ) % 60;
+                    seconds = Math.floor( seconds % 60 );
+
+                    if(hours && minutes){
+                        return ", "+hours+"h"+minutes+"min";
+                    } else if(hours) {
+                        return ", "+hours+"h";
+                    } else if(minutes){
+                        return ", "+minutes+"min";
+                    } else if(seconds) {
+                        return ", "+seconds+"s";
+                    } else{
+                        return "";
+                    }
+                };
+            }
+            //Call the api and the callback to deal with the category data
+            app.data.getCategoryData(callback);
+        };
+
+        /**
+        * Hide the one-D-shoveler container items
+        * @param none
+        */
+        this.hideOneDContainer = function() {
+            $('#one-D-shoveler-container').hide();
+            $('#one-D-summary-container').hide();
+        };
+
+        /**
+        * Show the one-D-shoveler container items
+        * @param none
+        */
+        this.showOneDContainer = function() {
+            $('#one-D-shoveler-container').show();
+            $('#one-D-summary-container').show();
         };
 
        /**
@@ -201,7 +227,6 @@
         * @param {Element} ele currently selected element
         */
         this.setHighlightedElement = function (ele) {
-            $('.shoveler-play-button').hide();
             ele = ele || this.currentSelectionEle;
             $(ele).removeClass(CLASS_MENU_ITEM_CHOSEN);
             $(ele).addClass(CLASS_MENU_ITEM_HIGHLIGHTED);
@@ -227,6 +252,7 @@
          * @param {integer} startIndex initial item to select
          */
         this.render = function ($el, catData, startIndex) {
+            this.rightNav = $('.right-nav');
             this.leftNavItems = catData;
             var leftNavStrings = [];
             for (var i = 0; i < catData.length; i++) {
