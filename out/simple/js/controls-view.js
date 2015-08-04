@@ -153,8 +153,6 @@
             this.playerView = playerView;
             playerView.on('videoStatus', this.handleVideoStatus, this);
 
-            //Start loading spinner image
-            this.transitionToImageSpinner(thumbURL);
         };
 
         /**
@@ -199,7 +197,6 @@
                     break;
                 case "playing":
                     this.timeUpdateHandler(duration, currentTime);
-                    this.transitionBackToSpinner();
                 case "resumed":
                     this.resumePressed();
                     break;
@@ -208,34 +205,7 @@
                     break;
             }
             this.previousTime = currentTime;
-        }.bind(this);
-
-        /**
-        * @function transitionBackToSpinner
-        * @description hide the special loading image spinner and go back to the simple one (used before ads)
-        * @param none
-        */
-        this.transitionBackToSpinner = function() {
-            $('#app-loading-image').hide();
-            $('#app-loading-spinner').width('150');
-            $('#app-loading-spinner').height('150');
-            $('#app-loading-spinner').css('top', '80px');
-            $('#app-loading-spinner').css('right', '60px');
-        };
-
-        /**
-        * @function transitionToImageSpinner
-        * @description transition preload image spinner
-        * @param none
-        */
-        this.transitionToImageSpinner = function(url) {
-            $('#app-loading-image').css('background-image', url);
-            $('#app-loading-image').show();
-            $('#app-loading-spinner').width('31em');
-            $('#app-loading-spinner').height('31em');
-            $('#app-loading-spinner').css('top', '230px');
-            $('#app-loading-spinner').css('right', '592px');
-        };           
+        }.bind(this);          
         
        /**
         * @function seekPressed 

@@ -46,11 +46,14 @@
             //change for search view
             if(!e || e.target.value){
               this.isOnSearchMode = true;
-              $('#left-nav').css('width', '140%');
+              $('#left-nav').css('width', '110%');
               $('#left-nav').css('height', '22%');
-              $('#left-nav').css('top', '-150px');
+              $('#left-nav').css('top', '-75px');
+              $('#left-nav').css('left', '120px');
+              $('.leftnav-login-box').css('visibility', 'hidden');
               $('.leftnav-menu-scrolling-list').css('padding-top', '0px');
               $('#app-header-bar').hide();
+              $('.leftnav-menulist-expanded').css('border-right', 'none');
             }
        }.bind(this);
 
@@ -61,7 +64,10 @@
             $('#left-nav').css('width', '840px');
             $('#left-nav').css('height', '1080px');
             $('#left-nav').css('top', 0);
+            $('#left-nav').css('left', 0);
+            $('.leftnav-login-box').css('visibility', 'visible');
             $('.leftnav-menu-scrolling-list').css('padding-top', '70px');
+            $('.leftnav-menulist-expanded').css('border-right', '4px solid rgba(223,115,183, 0.6)');
        }
 
        this.select = function () {
