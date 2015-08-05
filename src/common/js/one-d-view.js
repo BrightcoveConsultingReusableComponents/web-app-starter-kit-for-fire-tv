@@ -344,7 +344,7 @@
             else {
                 if (this.rowElements[index].pubDate) {
                     this.$el.find(".one-D-summary-pubdate").html('Published '+this.getDateDifference(this.rowElements[index].pubDate.toLocaleString()));
-                    this.$el.find(".shoveler-duration").html(this.convertSecondsToHHMMSS(Math.floor(this.rowElements[index].length/1000)));
+                    this.$el.find(".shoveler-duration-text").text(this.convertSecondsToHHMMSS(Math.floor(this.rowElements[index].length/1000)));
                 }
                 this.$el.find(".one-D-summary-description").css("margin-top", "");
             }

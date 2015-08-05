@@ -56,6 +56,7 @@
            <div class="right-nav">
            <div id="right-nav-cover-image"></div>
            <div id="right-nav-cover-title"></div>
+           <div id="right-nav-cover-details"></div>
            <div id="right-nav-cover-desc"></div>
            </div>
        </div>
@@ -116,7 +117,7 @@
         <div id="shoveler-view" class="shoveler-row-container">
             {{#each items}}
             <div id="{{id}}" class="shoveler-rowitem-static">
-            <div class = "shoveler-duration"></div>
+            <div class = "shoveler-duration"><div class = "shoveler-duration-text"></div></div>
             </div>
             {{/each}}
         </div>
@@ -137,6 +138,8 @@
             <div class = "next-video-text"></div>
             <div class = "next-video-description">{{description}}</div>
             <div class = "next-video-thumbnail"><img src="{{thumbURL}}"></div>
+            <div class = "next-video-spinner"> </div>
+            <div class = "next-video-order"> </div>
             <div class = "next-video-playingtext">
                 <span id = "next-video-upnext"> Up next in </span>
                 <span id = "next-video-starttext" class = "next-video-starttext">30 </span>
@@ -154,7 +157,6 @@
     <script id="controls-view-template" type="text/x-handlebars-template">
         <div class="gradient-to-bottom"></div>
         <div class="player-pause-button">
-            <img class="player-pause-indicator" src="assets/btn_pause.png"/>
         </div>
         <div class="player-controls-content-image"></div>
         <div class="player-controls-text">
@@ -162,6 +164,7 @@
         <div class="player-controls-content-subtitle">Subtitle</div>
         </div>
         <div class="watermark"></div>
+        <div class="player-controls-play-pause-button"></div>
         <div class="player-controls-container">
             <div class="player-controls-timeline-container">
                     <div class="player-controls-timeline">
@@ -184,7 +187,6 @@
                     <span class = "player-controls-skip-text">s</span>
                 </div>
             </div>
-            <div class="player-controls-button-back"><img class="player-back-button" src="assets/btn_player.png" /></div>
         </div>
     </script>
 
@@ -202,7 +204,6 @@
                 <img src="assets/live.png"/>
             </div>
             <div class="player-controls-content-title">Content Title</div>
-            <div class="player-controls-button-back"><img class="player-back-button" src="assets/btn_back.png" /></div>
             <div class="player-controls-content-subtitle">Subtitle</div>
         </div>
     </script>

@@ -118,26 +118,36 @@
         this.setCurrentCategoryCover = function(){
             var currentData;
             //Set the callback to get the necessary variables and create a cover image and description for the playlist
-            var callback = function(categoryData){
+            var coverCallback = function(categoryData, description){
+                //get and define data from ajax call
                 var currentData = categoryData;
+                var playlistInfo = currentData[0].playlistInfo;
+                //set base variables
                 var id = $('.shoveler-row-container').children().first().attr('id');
                 var img = $('#'+id).find('img');
                 var src = img.attr("src");
                 var url = "url('"+src+"')";
-                var playlistTitle = String($('.leftnav-list-item-selected').text()).trim();
+                var playlistTitle = playlistInfo.title.trim();
+                var playlistDescription = playlistInfo.description
                 var playlistLength = currentData.length;
-
+                
+                //get playlistDuration in seconds
                 var playlistDuration = 0;
                 for(var i=0; i<playlistLength; i++){
                     playlistDuration += Math.floor(currentData[i].length/1000);
                 }
-
+                
+                /* 
+                Show the cover image and description in the right side if the app is in the correct view
+                and there is actual data to show
+                */     
                 var view = app.currentView.constructor.name;
                 if(src && playlistTitle && view === 'LeftNavView'){
                     $('.right-nav').show();
                     $('#right-nav-cover-image').css("background-image", url);
                     $('#right-nav-cover-title').text(playlistTitle);
-                    $('#right-nav-cover-desc').text(playlistLength + " videos" + getLength(playlistDuration));
+                    $('#right-nav-cover-details').text(playlistLength + " videos" + getLength(playlistDuration));
+                    $('#right-nav-cover-desc').text(playlistDescription);
                 } else{
                     $('.right-nav').hide();
                 }
@@ -162,7 +172,7 @@
                 };
             }
             //Call the api and the callback to deal with the category data
-            app.data.getCategoryData(callback);
+            app.data.getCategoryData(coverCallback);
         };
 
         /**

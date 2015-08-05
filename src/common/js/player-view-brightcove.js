@@ -412,6 +412,7 @@
 
             //load the control after all the html is loaded
             this.playControls = $('.player-controls-container')[0];
+            this.videoPlayPauseButton = $('.player-controls-play-pause-button')[0];
 
         }.bind(this);
 
@@ -420,7 +421,8 @@
          * @description Show all the custom control icons, images and container
          */
         this.showCustomControls = function() {
-            $(".player-back-button").attr("src","assets/btn_player.png");
+            $(".player-controls-play-pause-button").css('background-image', 'url(assets/btn_player.png)');
+            this.videoPlayPauseButton.style.opacity = "0.99"
             $(".watermark").show();
             $(".gradient-to-bottom").show();
             $(".player-controls-content-image").show();
@@ -433,7 +435,7 @@
          * @description Hide all the custom control icons, images and container
          */
         this.hideCustomControls = function() {
-            $(".player-back-button").attr("src","assets/btn_pause.png");
+            $(".player-controls-play-pause-button").css('background-image', 'url(assets/btn_pause.png)');
             $(".watermark").hide();
             $(".gradient-to-bottom").hide();
             $(".player-controls-content-image").hide();
@@ -443,10 +445,13 @@
         }
 
         this.showAndHideControls = function() {
+            this.videoPlayPauseButton.style.display = "block";
             this.playControls.style.opacity = "0.99";
+            this.videoPlayPauseButton.style.opacity = "0.99"
             clearTimeout(this.playTimer);
             this.playTimer = setTimeout(function() {
                  this.playControls.style.opacity = "0";
+                 this.videoPlayPauseButton.style.opacity = "0"
             }.bind(this), 3000);
         };
 

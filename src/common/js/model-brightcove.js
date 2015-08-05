@@ -94,6 +94,7 @@
         this.mediaData = [];
         this.categoryData = [];
         this.playlistIds = [];
+        this.playlistInfo = []
         this.currSubCategory = [];
         this.currData = [];
         this.currentCategory = 0;
@@ -249,11 +250,11 @@
             this.categoryData = [];
             this.currentCategory = 0;
             this.mediaData = jsonData.items;
-
             for (var i = 0; i < this.mediaData.length; i++) {
                 if (this.mediaData[i].referenceId && this.mediaData[i].referenceId.substring(0, 6).toLowerCase() === this.REF_ID_PREFIX) {
                     this.categoryData.push(this.mediaData[i].name);
                     this.playlistIds.push(this.mediaData[i].id);
+                    this.playlistInfo.push({title: this.mediaData[i].name, description: this.mediaData[i].shortDescription})
                 }
             }
         }.bind(this);
@@ -396,7 +397,8 @@
                 length: data.length,
                 imgURL: data.videoStillURL,
                 thumbURL: data.thumbnailURL,
-                videoURL: data.videoId
+                videoURL: data.videoId,
+                playlistInfo: this.playlistInfo[this.currentCategory]
             };
             this.currData.push(currObj);
         };

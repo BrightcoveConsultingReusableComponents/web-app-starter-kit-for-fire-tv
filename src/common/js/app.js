@@ -214,12 +214,15 @@
             
             //Call back to change the right-center image cover for each of the playlists
             var changePlaylistImgCover = function(categoryData) {
-                //getting the variables to the playlist cover variables
+                //get playlistInfo
+                var playlistInfo = categoryData[0].playlistInfo;
+                //getting the variables to the playlist cover image/description
                 var firstKey = Object.keys(categoryData)[0];
                 var src = categoryData[firstKey].imgURL;
                 var title = categoryData[firstKey].title;
                 var url = "url('"+src+"')";
-                var playlistTitle = String($('.leftnav-list-item-selected').text()).trim();
+                var playlistTitle = playlistInfo.title.trim();
+                var playlistDescription = playlistInfo.description
                 var playlistLength = categoryData.length;
                 
                 var playlistDuration = 0;
@@ -230,10 +233,11 @@
                 //image, title and extra information about the playlist
                 $('#right-nav-cover-image').css("background-image", url);
                 $('#right-nav-cover-title').text(playlistTitle);
-                $('#right-nav-cover-desc').text(playlistLength + " videos" + getHoursAndMinutes(playlistDuration));
+                $('#right-nav-cover-details').text(playlistLength + " videos" + getLength(playlistDuration));
+                $('#right-nav-cover-desc').text(playlistDescription);
 
                 //auxiliar function to get hours and minutes from video length in seconds
-                function getHoursAndMinutes(seconds) {
+                function getLength(seconds) {
                     var hours = Math.floor( seconds / 3600 );
                     var minutes = Math.floor( seconds / 60 ) % 60;
                     seconds = Math.floor( seconds % 60 );
