@@ -341,13 +341,7 @@
         this.resumePressed = function() {
             // hide pause icon
             this.playIcon.style.opacity = "0";
-
-            /*
-            Currently the showAndHide command from the play event is handled by player-view-brightcove 
-            It shows a better performance to use the status information directly from the 'fountain'
-            */
-
-           //this.showAndHideControls();
+            this.showAndHideControls();
 
         };
 
@@ -356,6 +350,13 @@
          * @description shows the controls and hides them after 3s, resets the timer if this function is called again.
          */
         this.showAndHideControls = function() {
+
+            /*
+            Currently the showAndHide command from the play event is handled by player-view-brightcove.js 
+            It shows a better performance to use the status information directly from the brightcove player
+            */
+
+            /*
             this.containerControls.style.opacity = "0.99";
             clearTimeout(this.removalTimeout);
             this.removalTimeout = setTimeout(function() {
@@ -363,6 +364,7 @@
                  this.$rewindIndicator.hide();
                  this.$forwardIndicator.hide();
             }.bind(this), this.controlsHideTime);
+            */
         };
 
         /**

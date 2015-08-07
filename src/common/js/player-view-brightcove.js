@@ -135,7 +135,9 @@
          * @description Handles video element pause event
          */
         this.pauseEventHandler = function() {
-            this.showCustomControls();
+            if(this.brightcovePlayer.currentTime()){
+                this.showCustomControls();
+            }
             clearTimeout(this.playTimer);
             // we trigger the video status in the pause event handler because the pause event can come from the system
             // specifically it can be caused by the voice search functionality of Fire OS
@@ -154,6 +156,12 @@
 
         this.playEventHandler = function() {
             this.hideCustomControls();
+            if(this.brightcovePlayer.currentTime()){
+                this.showAndHideControls();
+            } else{
+                this.playControls.style.display = 'none';
+                this.videoPlayPauseButton.style.display = 'none';
+            }
             this.clearTimeouts();
             this.setTimeouts();
         }.bind(this);
@@ -422,12 +430,13 @@
          */
         this.showCustomControls = function() {
             $(".player-controls-play-pause-button").css('background-image', 'url(assets/btn_player.png)');
-            this.videoPlayPauseButton.style.opacity = "0.99"
+            this.videoPlayPauseButton.style.display = "block";
+            this.videoPlayPauseButton.style.opacity = "0.99";
+            this.playControls.style.display = 'block';
             $(".watermark").show();
             $(".gradient-to-bottom").show();
             $(".player-controls-content-image").show();
-            $(".player-controls-content-title").show();
-            $(".player-controls-content-subtitle").show();
+            $(".player-controls-text").show();
         }
 
         /**
@@ -439,13 +448,12 @@
             $(".watermark").hide();
             $(".gradient-to-bottom").hide();
             $(".player-controls-content-image").hide();
-            $(".player-controls-content-title").hide();
-            $(".player-controls-content-subtitle").hide();
-            this.showAndHideControls();
+            $(".player-controls-text").hide();
         }
 
         this.showAndHideControls = function() {
             this.videoPlayPauseButton.style.display = "block";
+            this.playControls.style.display = "block";
             this.playControls.style.opacity = "0.99";
             this.videoPlayPauseButton.style.opacity = "0.99"
             clearTimeout(this.playTimer);
@@ -527,6 +535,7 @@
          * @param {Number} position the timestamp
          */
         this.seekVideo = function(position) {
+            this.showAndHideControls();
             if (this.hasValidTimeAndDuration()) {
                 this.controlsView.continuousSeek = false;
                 this.trigger('videoStatus', this.brightcovePlayer.currentTime(), this.brightcovePlayer.duration(),
@@ -564,6 +573,7 @@
          * @param {number} direction the seek direction, positive for forward, negative for reverse
          */
         this.seekVideoRepeat = function(direction) {
+            this.showAndHideControls();
             this.controlsView.continuousSeek = true;
             var newPosition = null;
             if (direction > 0) {
@@ -605,6 +615,7 @@
          * @description Navigate to a position in the video, used when button released after continuous seek
          */
         this.seekVideoFinal = function() {
+            console.log('seekVideoFinal');
             if (this.isFF) {
                 this.buttonDowntime =  this.buttonDowntime !== this.brightcovePlayer.duration() ? this.buttonDowntime - this.skipLength : this.buttonDowntime;
                 this.isFF = false;

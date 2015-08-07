@@ -235,6 +235,9 @@
                 $('#right-nav-cover-title').text(playlistTitle);
                 $('#right-nav-cover-details').text(playlistLength + " videos" + getLength(playlistDuration));
                 $('#right-nav-cover-desc').text(playlistDescription);
+                
+                //change background image to a blurred version of the first playlist video
+                $('.app-background-blur').css('background-image', url);
 
                 //auxiliar function to get hours and minutes from video length in seconds
                 function getLength(seconds) {
@@ -451,18 +454,33 @@
                     if(this.settingsParams.entitlement) {
                         this.transitionToEntitlementView();
                     }
+                    if(!this.oneDView.hadShrunk){
+                        this.oneDView.shrinkShoveler();
+                        this.oneDView.showTextDetails();
+                    } else{
+                        this.oneDView.scrollTextDetails(10);
+                    }
                 } 
                 else { 
                     if(dir){
                         this.transitionToLeftNavView();
                     } else{
                         //turn to expanded search mode
-                        this.searchInputView.select();
-                        this.leftNavView.currSelectedIndex = 1;
-                        this.leftNavView.selectLeftNavItem();
-                        this.transitionToLeftNavView();
-                        this.searchInputView.changeToSearchView();
-                        this.searchInputView.searchFromShoveler = true;
+                        if(this.oneDView.hadShrunk){
+                            if(this.oneDView.textSelectionOnRegularPosition){
+                                this.oneDView.expandShoveler();
+                                this.oneDView.hideTextDetails();
+                            } else{
+                                this.oneDView.scrollTextDetails(-10);
+                            }
+                        } else{
+                            this.searchInputView.select();
+                            this.leftNavView.currSelectedIndex = 1;
+                            this.leftNavView.selectLeftNavItem();
+                            this.transitionToLeftNavView();
+                            this.searchInputView.changeToSearchView();
+                            this.searchInputView.searchFromShoveler = true;
+                        }
                     }
                 }
             }, this);

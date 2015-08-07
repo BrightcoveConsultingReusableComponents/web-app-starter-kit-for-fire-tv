@@ -42,6 +42,7 @@
     ],
     "libJS" : [
         "../../libs/jquery.js",
+        "../../libs/blur.min.js",
         "../../libs/handlebars-v1.3.0.js"
     ]
 }

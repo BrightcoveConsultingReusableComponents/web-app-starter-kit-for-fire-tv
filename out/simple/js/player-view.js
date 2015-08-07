@@ -211,6 +211,7 @@
          * Show the video
          */
         this.show = function() {
+            console.log('aqui')
             this.$el.css("visibility", "");
             if (this.durationFound) {
                 this.controlsView.showAndHideControls();

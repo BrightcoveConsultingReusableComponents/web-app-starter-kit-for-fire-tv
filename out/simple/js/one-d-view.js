@@ -21,6 +21,12 @@
         this.titleText = null;
         this.$shovelerContainer = null;
         this.noItems = false;
+        this.hadShrunk = false;
+
+        //text selection variables
+        this.textSelection = null;
+        this.textBackgroundColor = 'rgba(0, 0, 0, 0.2)';
+        this.textSelectionOnRegularPosition = true;
 
         //jquery global variables
         this.$el = null;
@@ -97,6 +103,8 @@
                 return;
             }
 
+            this.textSelection = $('.one-D-summary-description')[0];
+
             this.noItems = false;
             this.createShovelerView(rowData);
             this.createButtonView(displayButtonsParam, this.$el);
@@ -112,7 +120,7 @@
             // create the shoveler subview
             this.$shovelerContainer = this.$el.children("#one-D-shoveler-container");
             var shovelerView = this.shovelerView = new ShovelerView();
-            this.shovelerView.render(this.$shovelerContainer, rowData);
+            this.shovelerView.render(this.$shovelerContainer, rowData, this);
 
             shovelerView.on('exit', function() {
                 this.trigger('exit');
@@ -200,6 +208,20 @@
             this.shovelerView.trigger("stopScroll", this.shovelerView.currSelection);
         };
 
+        /**
+        * Changes the background color based on the selected shoveler image
+        */
+        this.changeBackgroundColor = function() {
+            var img = $('.shoveler-rowitem-selected img')[0];
+            if(img){
+                var src = img.src;
+                var url = "url('"+src+"')";
+                //change background image to a blurred version of the first playlist video
+                $('.app-background-blur').css('background-image', url);
+            }
+        };
+
+
        /**
         * Make the shoveler the active view
         */
@@ -263,13 +285,41 @@
         */
         this.shrinkShoveler = function () {
             this.shovelerView.shrinkSelected();
+            this.hadShrunk = true;
         };
 
        /**
         * Expand the selected shoveler item for 'in focus' effect
         */
         this.expandShoveler = function () {
+            this.hadShrunk = false;
             this.shovelerView.setTransforms();
+        };
+
+        this.showTextDetails = function () {
+            if(this.textSelection.innerHTML){
+                this.textSelection.style.backgroundColor = this.textBackgroundColor;
+                this.textSelection.style.border = '5px solid rgba(223,115,183, 0.5)';
+            } else{
+                this.expandShoveler();
+                this.hadShrunk = false;
+            }
+        };
+
+        this.hideTextDetails = function() {
+            this.textSelection.style.background = 'none';
+            this.textSelection.style.border = 'none';
+        };
+
+        this.scrollTextDetails = function(dir) {
+            if(dir){
+                this.textSelection.scrollTop += dir;
+            }
+            if (!this.textSelection.scrollTop) {
+                this.textSelectionOnRegularPosition = true;
+            } else{
+                this.textSelectionOnRegularPosition = false;
+            }
         };
 
         /**
@@ -348,6 +398,7 @@
                 }
                 this.$el.find(".one-D-summary-description").css("margin-top", "");
             }
+            this.changeBackgroundColor();
 
         };
 

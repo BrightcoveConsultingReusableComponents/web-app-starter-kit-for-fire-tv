@@ -88,7 +88,9 @@
          * @param {Element} el one-d-view container
          * @param {Object} row the the data for the row
          */
-        this.render = function (el, row) {
+        this.render = function (el, row, oneDView) {
+            
+            this.oneDView = oneDView;
             this.parentContainer = el;
             // Build the main content template and add it
             this.titleText = row.title;
@@ -214,8 +216,14 @@
         * @param {Number} dir the direction of the move
         */
         this.shovelMove = function (dir) {
-            this.trigger("startScroll", dir);
-            this.selectRowElement(dir);
+            if(!this.oneDView.hadShrunk){
+                this.trigger("startScroll", dir);
+                this.selectRowElement(dir);
+            } else{
+                this.oneDView.expandShoveler();
+                this.oneDView.hideTextDetails();
+                this.oneDView.textSelection.scrollTop = 0;
+            }
         }.bind(this);
 
         /**

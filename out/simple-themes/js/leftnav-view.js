@@ -148,6 +148,10 @@
                     $('#right-nav-cover-title').text(playlistTitle);
                     $('#right-nav-cover-details').text(playlistLength + " videos" + getLength(playlistDuration));
                     $('#right-nav-cover-desc').text(playlistDescription);
+                    
+                    //change background image to a blurred version of the first playlist video
+                    $('.app-background-blur').css('background-image', url);
+
                 } else{
                     $('.right-nav').hide();
                 }
