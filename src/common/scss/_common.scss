@@ -39,7 +39,7 @@ div {
 
 .app-background-blur {
     position: fixed;
-    left: 10%;
+    left: 1%;
     right: 0;
     z-index: 0;
     content: "";
@@ -48,11 +48,11 @@ div {
     z-index: 0;
     display: block;
     background-image: none;
-    width: 90%;
+    width: 100%;
     height: 100%;
-    opacity: 0.5;
+    opacity: 0.4;
     background-size: 100% 100%;
-    -webkit-filter: blur(70px);
+    -webkit-filter: blur(20px);
     -webkit-transform: translate3d(0, 0, 0);
 }
 
@@ -65,7 +65,7 @@ div {
 
 .app-top-bar {
     position : absolute;
-    width    : 93%;
+    width    : 100%;
     height   : 100%;
     right: 0;
     background: linear-gradient(
@@ -91,7 +91,7 @@ div {
 .right-nav{
     position : absolute;
     top: 225px;
-    left: 815px;
+    left: 950px;
     display:none;
 }
 
@@ -113,10 +113,10 @@ div {
     font-size   : 2.0em;
     font-family : $font-family-medium;
     overflow    : hidden;
+    height: auto;
+    max-height: 160px;
+    width: 75%;
     margin-top  : 10px;
-    @include display-box;
-    @include box-orient(vertical);
-    @include line-clamp(1);
 }
 
 #right-nav-cover-details {
@@ -136,6 +136,18 @@ div {
     text-align: justify;
     @include line-clamp(7);
     word-wrap: break-word;
+}
+
+#right-nav-cover-icon {
+    position : absolute;
+    top: 385px;
+    left: 660px;
+    width: 85px;
+    height: 60px;
+    opacity: 0.7;
+    background-image: $img-playlist-icon;
+    background-size: 100% 100%;
+
 }
 
 //
@@ -213,7 +225,6 @@ div {
     padding      : 0 50px 0 $pos-left-content-position;
     overflow     : hidden;
     margin-bottom    : 2px;
-    background-color : $color-menu-item-bg;
     @include transition-property(opacity);
     @include transition-duration($ani-duration-leftnav-item);
     @include display-box;
@@ -249,7 +260,7 @@ div {
     color  : $color-menu-search-text;
     padding-left : 140px;
     outline-width: 0;
-    background: rgba(232, 232, 232, 0.0980392) $img-icon-search no-repeat scroll left 45px top 50% / 40px 44px padding-box border-box;
+    background: $img-icon-search no-repeat scroll left 45px top 50% / 40px 44px padding-box border-box;
 }
 
 .leftnav-search-box .leftnav-list-item-highlighted {
@@ -265,7 +276,7 @@ div {
     color  : $color-menu-search-text;
     padding-left : 140px;
     outline-width: 0;
-    background: rgba(232, 232, 232, 0.0980392) $img-icon-login no-repeat scroll left 45px top 50% / 40px 44px padding-box border-box;
+    background:  $img-icon-login no-repeat scroll left 45px top 50% / 40px 44px padding-box border-box;
 }
 
 .leftnav-login-box .leftnav-list-item-highlighted {
@@ -308,6 +319,19 @@ div {
     @include transition-property(opacity);
     @include transition-duration($ani-duration-maincontent-opacity);
     @include transition-timing-function(linear);
+}
+
+#one-D-scroll-icon {
+    position: absolute;
+    top: 800px;
+    left: 800px;
+    margin-top: 20px;
+    width: 80px;
+    height: 100px;;
+    background-image: $img-scroll-icon;
+    background-size: 100% 100%;
+    opacity: 0.7;
+    display: none;
 }
 
 .one-D-details-summary-text {
@@ -354,6 +378,7 @@ div {
         height: auto;
         max-height: 205px;
         text-align: justify;
+        padding: 1px;
     }
     .one-D-live-icon {
         background-image: url(assets/live.png);
@@ -810,8 +835,9 @@ div {
     color       : $color-title-text;
     font-weight : lighter;
     font-size       : 40px;
-    width       : 33%;
+    width       : 45%;
     overflow: hidden;
+    max-height: 100px;
 }
 
 .next-video-description {

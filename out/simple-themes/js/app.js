@@ -265,8 +265,22 @@
             * @param {none}
             */
             leftNavView.on('changeCover', function() {
-                app.data.getCategoryData(changePlaylistImgCover);
-            })
+                if(this.leftNavView.currSelectedIndex>1){
+                    app.data.getCategoryData(changePlaylistImgCover);
+                }
+            }, this);
+
+            /**
+            * Event Handler - Handle the login event
+            * @param {none}
+            */
+            leftNavView.on('login', function() {
+                if(!this.loginInputView.isTokenValid()){
+                    this.loginInputView.getToken();
+                } else{
+                    this.loginInputView.renew();
+                }
+            }, this);
 
            /**
             * Event Handler - Select menu item

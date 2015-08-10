@@ -50,7 +50,7 @@ div {
 
 .app-background-blur {
   position: fixed;
-  left: 10%;
+  left: 1%;
   right: 0;
   z-index: 0;
   content: "";
@@ -59,11 +59,11 @@ div {
   z-index: 0;
   display: block;
   background-image: none;
-  width: 90%;
+  width: 100%;
   height: 100%;
-  opacity: 0.5;
+  opacity: 0.4;
   background-size: 100% 100%;
-  -webkit-filter: blur(70px);
+  -webkit-filter: blur(20px);
   -webkit-transform: translate3d(0, 0, 0); }
 
 .app-main-container {
@@ -74,7 +74,7 @@ div {
 
 .app-top-bar {
   position: absolute;
-  width: 93%;
+  width: 100%;
   height: 100%;
   right: 0;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8) 50%, transparent 100%); }
@@ -92,7 +92,7 @@ div {
 .right-nav {
   position: absolute;
   top: 225px;
-  left: 815px;
+  left: 950px;
   display: none; }
 
 #right-nav-cover-image {
@@ -112,21 +112,10 @@ div {
   font-size: 2.0em;
   font-family: "Helvetica Neue Medium", "HelveticaNeue-Medium", Helvetica, Arial, sans-serif;
   overflow: hidden;
-  margin-top: 10px;
-  display: -webkit-box;
-  /* NEW - Chrome */
-  display: -moz-box;
-  /* OLD - Firefox 19- (buggy but mostly works) */
-  display: -ms-flexbox;
-  /* TWEENER - IE 10 */
-  display: box;
-  /* NEW, Spec - Opera 12.1, Firefox 20+ */
-  -webkit-box-orient: vertical;
-  -moz-box-orient: vertical;
-  box-orient: vertical;
-  -webkit-line-clamp: 1;
-  -moz-line-clamp: 1;
-  line-clamp: 1; }
+  height: auto;
+  max-height: 160px;
+  width: 75%;
+  margin-top: 10px; }
 
 #right-nav-cover-details {
   font-weight: 200;
@@ -147,6 +136,16 @@ div {
   line-clamp: 7;
   word-wrap: break-word; }
 
+#right-nav-cover-icon {
+  position: absolute;
+  top: 385px;
+  left: 660px;
+  width: 85px;
+  height: 60px;
+  opacity: 0.7;
+  background-image: url("assets/playlist_icon.png");
+  background-size: 100% 100%; }
+
 .leftnav-main-container {
   position: absolute;
   top: 0;
@@ -162,7 +161,7 @@ div {
   padding-top: 0px;
   margin-left: 30px;
   overflow: hidden;
-  background-color: rgba(26, 29, 31, 0.9);
+  background-color: #1a1d1f;
   border-right: 4px solid rgba(223, 115, 183, 0.6); }
 
 .leftnav-menulist-expanded {
@@ -181,7 +180,7 @@ div {
   background-size: 40px 44px; }
 
 .leftnav-menulist-collapsed .leftnav-list-item-static {
-  background-color: rgba(26, 29, 31, 0.9);
+  background-color: #1a1d1f;
   border: none;
   opacity: 0.7; }
 
@@ -208,7 +207,6 @@ div {
   padding: 0 50px 0 150px;
   overflow: hidden;
   margin-bottom: 2px;
-  background-color: rgba(232, 232, 232, 0.1);
   -webkit-transition-property: opacity;
   -moz-transition-property: opacity;
   transition-property: opacity;
@@ -256,7 +254,7 @@ div {
   color: #e8e8e8;
   padding-left: 140px;
   outline-width: 0;
-  background: rgba(232, 232, 232, 0.0980392) url("assets/search_icon.png") no-repeat scroll left 45px top 50%/40px 44px padding-box border-box; }
+  background: url("assets/search_icon.png") no-repeat scroll left 45px top 50%/40px 44px padding-box border-box; }
 
 .leftnav-search-box .leftnav-list-item-highlighted {
   color: #e8e8e8;
@@ -270,7 +268,7 @@ div {
   color: #e8e8e8;
   padding-left: 140px;
   outline-width: 0;
-  background: rgba(232, 232, 232, 0.0980392) url("assets/login_icon.png") no-repeat scroll left 45px top 50%/40px 44px padding-box border-box; }
+  background: url("assets/login_icon.png") no-repeat scroll left 45px top 50%/40px 44px padding-box border-box; }
 
 .leftnav-login-box .leftnav-list-item-highlighted {
   color: #e8e8e8;
@@ -317,6 +315,18 @@ div {
   -webkit-transition-timing-function: linear;
   -moz-transition-timing-function: linear;
   transition-timing-function: linear; }
+
+#one-D-scroll-icon {
+  position: absolute;
+  top: 800px;
+  left: 800px;
+  margin-top: 20px;
+  width: 80px;
+  height: 100px;
+  background-image: url("assets/scroll_icon.png");
+  background-size: 100% 100%;
+  opacity: 0.7;
+  display: none; }
 
 .one-D-details-summary-text {
   position: absolute;
@@ -377,7 +387,8 @@ div {
     overflow: hidden;
     height: auto;
     max-height: 205px;
-    text-align: justify; }
+    text-align: justify;
+    padding: 1px; }
   .one-D-details-summary-text .one-D-live-icon {
     background-image: url(assets/live.png);
     height: 44px;
@@ -804,8 +815,9 @@ div {
   color: #e8e8e8;
   font-weight: lighter;
   font-size: 40px;
-  width: 33%;
-  overflow: hidden; }
+  width: 45%;
+  overflow: hidden;
+  max-height: 100px; }
 
 .next-video-description {
   display: none;

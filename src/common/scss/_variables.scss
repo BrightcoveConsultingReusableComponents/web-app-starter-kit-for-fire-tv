@@ -36,6 +36,8 @@ $watermark-image : url('assets/watermark.png') !default;
 
 $img-playing-icon  : url('assets/btn_player.png') !default;
 $img-paused-icon  : url('assets/btn_pause.png') !default; 
+$img-playlist-icon  : url('assets/playlist_icon.png') !default; 
+$img-scroll-icon  : url('assets/scroll_icon.png') !default;
 
 //
 //Fonts - used by FireTV
@@ -84,7 +86,7 @@ $color-meta-secondary-text: #b9bbbd !default;
 $color-description-text : #e8e8e8 !default;
 $color-box-shadow : rgba(0,0,0,0.44) !default;
 
-$color-menu-base-bg : rgba(#1a1d1f, 0.9) !default;
+$color-menu-base-bg : rgba(#1a1d1f, 1.0) !default;
 //$color-menu-base-bg : rgba(#42494F, 0.9) !default;
 
 $color-menu-item-text :  #b9bbbd !default;

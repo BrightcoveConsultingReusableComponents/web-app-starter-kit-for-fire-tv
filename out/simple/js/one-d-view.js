@@ -25,6 +25,7 @@
 
         //text selection variables
         this.textSelection = null;
+        this.titleSelection = null;
         this.textBackgroundColor = 'rgba(0, 0, 0, 0.2)';
         this.textSelectionOnRegularPosition = true;
 
@@ -104,6 +105,7 @@
             }
 
             this.textSelection = $('.one-D-summary-description')[0];
+            this.titleSelection = $('.one-D-summary-title')[0];
 
             this.noItems = false;
             this.createShovelerView(rowData);
@@ -299,7 +301,10 @@
         this.showTextDetails = function () {
             if(this.textSelection.innerHTML){
                 this.textSelection.style.backgroundColor = this.textBackgroundColor;
-                this.textSelection.style.border = '5px solid rgba(223,115,183, 0.5)';
+                this.textSelection.style.border = '4px solid rgba(223,115,183, 0.5)';
+                this.titleSelection.style.width = '800px';
+                this.textSelection.style.width = '800px';
+
             } else{
                 this.expandShoveler();
                 this.hadShrunk = false;
@@ -309,6 +314,8 @@
         this.hideTextDetails = function() {
             this.textSelection.style.background = 'none';
             this.textSelection.style.border = 'none';
+            this.titleSelection.style.width = '608px';
+            this.textSelection.style.width = '608px';
         };
 
         this.scrollTextDetails = function(dir) {

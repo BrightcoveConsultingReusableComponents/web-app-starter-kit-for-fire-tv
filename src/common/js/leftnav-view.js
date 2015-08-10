@@ -24,7 +24,7 @@
     */
     function LeftNavView() {
         // mixin inheritance, initialize this as an event handler for these events:
-        Events.call(this, ['exit', 'deselect', 'indexChange', 'select', 'makeActive', 'loadComplete', 'changeCover']);
+        Events.call(this, ['exit', 'deselect', 'indexChange', 'select', 'makeActive', 'loadComplete', 'changeCover', 'login']);
         
         this.scrollingContainerEle = null;
         this.leftNavContainerEle   = null;
@@ -406,6 +406,7 @@
                 // switch the current view state to the main content view
                 var isObject = typeof this.leftNavItems[this.currSelectedIndex] === "object"; 
                 if (this.currSelectedIndex === 0){
+                    this.trigger('login');
                     return;
                 }
                 var emptySearch = isObject && (this.leftNavItems[this.currSelectedIndex].currentSearchQuery === null || this.leftNavItems[this.currSelectedIndex].currentSearchQuery.length === 0);

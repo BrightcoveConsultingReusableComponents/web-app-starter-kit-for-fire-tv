@@ -53,7 +53,6 @@
               $('.leftnav-login-box').css('visibility', 'hidden');
               $('.leftnav-menu-scrolling-list').css('padding-top', '0px');
               $('#app-header-bar').hide();
-              $('.leftnav-menulist-expanded').css('border-right', 'none');
             }
        }.bind(this);
 
@@ -67,7 +66,6 @@
             $('#left-nav').css('left', 0);
             $('.leftnav-login-box').css('visibility', 'visible');
             $('.leftnav-menu-scrolling-list').css('padding-top', '70px');
-            $('.leftnav-menulist-expanded').css('border-right', '4px solid rgba(223,115,183, 0.6)');
        }
 
        this.select = function () {
