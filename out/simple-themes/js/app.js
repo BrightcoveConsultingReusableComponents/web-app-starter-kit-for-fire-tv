@@ -275,11 +275,7 @@
             * @param {none}
             */
             leftNavView.on('login', function() {
-                if(!this.loginInputView.isTokenValid()){
-                    this.loginInputView.getToken();
-                } else{
-                    this.loginInputView.renew();
-                }
+                this.loginInputView.confirmLogin();
             }, this);
 
            /**
@@ -477,9 +473,13 @@
                 } 
                 else { 
                     if(dir){
-                        this.transitionToLeftNavView();
+                        if(!this.oneDView.hadShrunk){
+                            this.transitionToLeftNavView();
+                        } else {
+                            this.oneDView.expandShoveler();
+                            this.oneDView.hideTextDetails();
+                        }
                     } else{
-                        //turn to expanded search mode
                         if(this.oneDView.hadShrunk){
                             if(this.oneDView.textSelectionOnRegularPosition){
                                 this.oneDView.expandShoveler();
@@ -488,12 +488,15 @@
                                 this.oneDView.scrollTextDetails(-10);
                             }
                         } else{
+                            this.transitionToLeftNavView();
+                            /*
+                            //turn to expanded search mode
                             this.searchInputView.select();
                             this.leftNavView.currSelectedIndex = 1;
                             this.leftNavView.selectLeftNavItem();
                             this.transitionToLeftNavView();
                             this.searchInputView.changeToSearchView();
-                            this.searchInputView.searchFromShoveler = true;
+                            this.searchInputView.searchFromShoveler = true;*/
                         }
                     }
                 }

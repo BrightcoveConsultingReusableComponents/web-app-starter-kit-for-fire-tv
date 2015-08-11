@@ -110,7 +110,7 @@ div {
     color    : $color-title-text;
     line-height: 1.4;
     color       : $color-theme-transparent;
-    font-size   : 2.0em;
+    font-size   : 1.8em;
     font-family : $font-family-medium;
     overflow    : hidden;
     height: auto;
@@ -127,26 +127,28 @@ div {
 
 #right-nav-cover-desc {
     color       : $color-description-text;
-    font-size   : 1.5em;
-    height: auto;
-    max-height: 230px;
-    width: 83%;
+    font-size   : 1.2em;
+    width: 80%;
     align-items : center;
     overflow: hidden;
     text-align: justify;
-    @include line-clamp(7);
     word-wrap: break-word;
+    height: auto;
+    max-height: 230px;
+    @include display-box;
+    @include box-orient(vertical);
 }
 
 #right-nav-cover-icon {
     position : absolute;
-    top: 385px;
-    left: 660px;
-    width: 85px;
-    height: 60px;
-    opacity: 0.7;
+    top: 380px;
+    left: 655px;
+    width: 95px;
+    height: 70px;
+    opacity: 1.0;
     background-image: $img-playlist-icon;
     background-size: 100% 100%;
+    background-color: rgba(255, 255, 255, 0.5);
 
 }
 
@@ -374,11 +376,13 @@ div {
         align-items : center;
         @include display-box;
         @include box-orient(vertical);
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: hidden;
         height: auto;
         max-height: 205px;
         text-align: justify;
         padding: 1px;
+        padding-right: 10px;
     }
     .one-D-live-icon {
         background-image: url(assets/live.png);
@@ -387,6 +391,26 @@ div {
         background-position-y: 5px;
         margin-right: 15px;
         background-repeat: no-repeat;
+    }
+
+    ::-webkit-scrollbar {
+        width: 12px;
+        height: 10px;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    ::-webkit-scrollbar-track-piece {
+        background: #888
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #eee;
+        opacity: 0.5;
+        border-radius: 10px;
     }
 }
 

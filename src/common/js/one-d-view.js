@@ -302,9 +302,9 @@
             if(this.textSelection.innerHTML){
                 this.textSelection.style.backgroundColor = this.textBackgroundColor;
                 this.textSelection.style.border = '4px solid rgba(223,115,183, 0.5)';
-                this.titleSelection.style.width = '800px';
-                this.textSelection.style.width = '800px';
-
+                this.titleSelection.style.width = '620px';
+                this.textSelection.style.width = '620px';
+                this.textSelection.style.overflowY = 'scroll';
             } else{
                 this.expandShoveler();
                 this.hadShrunk = false;
@@ -312,6 +312,7 @@
         };
 
         this.hideTextDetails = function() {
+            this.textSelection.style.overflowY = 'hidden';
             this.textSelection.style.background = 'none';
             this.textSelection.style.border = 'none';
             this.titleSelection.style.width = '608px';
