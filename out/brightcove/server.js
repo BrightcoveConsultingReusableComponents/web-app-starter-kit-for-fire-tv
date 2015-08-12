@@ -42,7 +42,7 @@ app.get('/login', function(req, res) {
 
         if(ip in data){
             if(data[ip].email && data[ip].password){
-                res.send('#'+data[ip].email);
+                res.send('#'+data[ip].username);
             } else{
                 res.send(data[ip].token || data[ip]);
             }
@@ -72,12 +72,41 @@ app.get('/login/check', function(req, res) {
 
         if(ip in data){
             if(data[ip].email && data[ip].password){
-                res.send('#'+data[ip].email);
+                res.send('#'+data[ip].username);
             } else{
                 res.send(null);
             }
         } else{
             res.send(null);
+        }
+
+    });
+
+});
+
+app.get('/login/logout', function(req, res) {
+    var ip = req.headers['x-forwarded-for'] || 
+      req.connection.remoteAddress || 
+      req.socket.remoteAddress ||
+      req.connection.socket.remoteAddress;
+    ip = ip.replace(/f|:/gi, '');
+    ip = ip.replace(/\./g, '-');
+    var token = generateToken();
+
+    var database = new Firebase('https://intense-heat-5166.firebaseio.com/webfireTV/');
+    var data = {};
+
+    database.once("value", function(snapshot) {
+        data = snapshot.val();
+        console.log(ip);
+        if(ip in data){
+            console.log('1')
+            delete data[ip];
+            database.set(data);
+            res.send('#'+token);
+        } else{  
+            console.log('2');
+            res.send('#'+token); 
         }
 
     });

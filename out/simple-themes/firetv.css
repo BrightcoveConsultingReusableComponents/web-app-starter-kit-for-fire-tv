@@ -146,8 +146,6 @@ div {
   background-image: none;
   background-size: 100% 100%;
   -webkit-box-shadow: 0px 0px 10px 10px rgba(223, 115, 183, 0.5);
-  -moz-box-shadow: 0px 0px 10px 10px rgba(223, 115, 183, 0.5);
-  box-shadow: 0px 0px 10px 10px rgba(223, 115, 183, 0.5);
   border: none; }
 
 #right-nav-cover-title {
@@ -593,8 +591,6 @@ div {
   -moz-box-shadow: 0px 10px 18px 3px black;
   box-shadow: 0px 10px 18px 3px black;
   -webkit-box-shadow: 0px 0px 10px 10px rgba(223, 115, 183, 0.5);
-  -moz-box-shadow: 0px 0px 10px 10px rgba(223, 115, 183, 0.5);
-  box-shadow: 0px 0px 10px 10px rgba(223, 115, 183, 0.5);
   border: 1px solid rgba(223, 115, 183, 0.6); }
 
 .shoveler-subcat-bg {
@@ -770,8 +766,6 @@ div {
   width: 310px;
   margin-top: 20px;
   -webkit-box-shadow: 0px 0px 10px 10px rgba(223, 115, 183, 0.5);
-  -moz-box-shadow: 0px 0px 10px 10px rgba(223, 115, 183, 0.5);
-  box-shadow: 0px 0px 10px 10px rgba(223, 115, 183, 0.5);
   border: 0.5px rgba(223, 115, 183, 0.5);
   background-image: none;
   background-size: cover;

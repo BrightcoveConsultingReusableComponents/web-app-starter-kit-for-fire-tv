@@ -14,9 +14,7 @@
     function BrightcovePlayerView(settings) {
         // mixin inheritance, initialize this as an event handler for these events:
         Events.call(this, ['exit', 'videoStatus', 'videoError', 'indexChange', 'error']);
-        
-        //timer for timeout event to hide controls
-        this.playTimer = null;
+
         //jquery variables
         this.$el = null;
         this.$currSeekTime = null;
@@ -135,33 +133,14 @@
          * @description Handles video element pause event
          */
         this.pauseEventHandler = function() {
-            if(this.brightcovePlayer.currentTime()){
-                this.showCustomControls();
-            }
-            clearTimeout(this.playTimer);
             // we trigger the video status in the pause event handler because the pause event can come from the system
             // specifically it can be caused by the voice search functionality of Fire OS
-
-            /* We don't want to show the pause icon for the following cases
-             * - when an ad starts and the brightcove player is paused
-             * - when a video ends and the brightcove player is paused
-             */
-            if (this.brightcovePlayer.currentTime() !== 0 && this.brightcovePlayer.currentTime() !== this.brightcovePlayer.duration()) {
-                this.trigger('videoStatus', this.brightcovePlayer.currentTime(), this.brightcovePlayer.duration(),
-                    'paused');
-                this.clearTimeouts();
-            }
-
+            this.trigger('videoStatus', this.brightcovePlayer.currentTime(), this.brightcovePlayer.duration(),
+                'paused');
+            this.clearTimeouts();            
         }.bind(this);
 
         this.playEventHandler = function() {
-            this.hideCustomControls();
-            if(this.brightcovePlayer.currentTime()){
-                this.showAndHideControls();
-            } else{
-                this.playControls.style.display = 'none';
-                this.videoPlayPauseButton.style.display = 'none';
-            }
             this.clearTimeouts();
             this.setTimeouts();
         }.bind(this);
@@ -315,7 +294,7 @@
         this.show = function() {
             this.$el.css("visibility", "");
             if (this.durationFound) {
-                this.showAndHideControls();
+                this.controlsView.showAndHideControls();
             }
         };
 
@@ -347,7 +326,6 @@
          * @param {Object} index the index corresponding to the data to be rendered
          */
         this.render = function($container, data, index) {
-
             // Build the main content template and add it
             this.items = data;
             var video_data = data[index];
@@ -359,7 +337,6 @@
 
             this.$containerControls = $container.find(".player-controls-container");
             this.containerControls = this.$containerControls[0];
-            this.buttonBack = $container.find(".player-controls-button-back ");
 
             // dynamically build the player video element
             this.playerHTML = '<video id="' + video_data.id + '" data-account="' + settings.accountID +
@@ -418,50 +395,7 @@
             this.setTimeouts();
             this.knownPlayerErrorTriggered = false;
 
-            //load the control after all the html is loaded
-            this.playControls = $('.player-controls-container')[0];
-            this.videoPlayPauseButton = $('.player-controls-play-pause-button')[0];
-
         }.bind(this);
-
-        /**
-         * @function Show Custom Controls
-         * @description Show all the custom control icons, images and container
-         */
-        this.showCustomControls = function() {
-            $(".player-controls-play-pause-button").css('background-image', 'url(assets/btn_player.png)');
-            this.videoPlayPauseButton.style.display = "block";
-            this.videoPlayPauseButton.style.opacity = "0.99";
-            this.playControls.style.display = 'block';
-            $(".watermark").show();
-            $(".gradient-to-bottom").show();
-            $(".player-controls-content-image").show();
-            $(".player-controls-text").show();
-        }
-
-        /**
-         * @function Hide Custom Controls
-         * @description Hide all the custom control icons, images and container
-         */
-        this.hideCustomControls = function() {
-            $(".player-controls-play-pause-button").css('background-image', 'url(assets/btn_pause.png)');
-            $(".watermark").hide();
-            $(".gradient-to-bottom").hide();
-            $(".player-controls-content-image").hide();
-            $(".player-controls-text").hide();
-        }
-
-        this.showAndHideControls = function() {
-            this.videoPlayPauseButton.style.display = "block";
-            this.playControls.style.display = "block";
-            this.playControls.style.opacity = "0.99";
-            this.videoPlayPauseButton.style.opacity = "0.99"
-            clearTimeout(this.playTimer);
-            this.playTimer = setTimeout(function() {
-                 this.playControls.style.opacity = "0";
-                 this.videoPlayPauseButton.style.opacity = "0"
-            }.bind(this), 3000);
-        };
 
         /**
          * @function pauseAd
@@ -535,7 +469,6 @@
          * @param {Number} position the timestamp
          */
         this.seekVideo = function(position) {
-            this.showAndHideControls();
             if (this.hasValidTimeAndDuration()) {
                 this.controlsView.continuousSeek = false;
                 this.trigger('videoStatus', this.brightcovePlayer.currentTime(), this.brightcovePlayer.duration(),
@@ -573,7 +506,6 @@
          * @param {number} direction the seek direction, positive for forward, negative for reverse
          */
         this.seekVideoRepeat = function(direction) {
-            this.showAndHideControls();
             this.controlsView.continuousSeek = true;
             var newPosition = null;
             if (direction > 0) {
@@ -615,7 +547,6 @@
          * @description Navigate to a position in the video, used when button released after continuous seek
          */
         this.seekVideoFinal = function() {
-            console.log('seekVideoFinal');
             if (this.isFF) {
                 this.buttonDowntime =  this.buttonDowntime !== this.brightcovePlayer.duration() ? this.buttonDowntime - this.skipLength : this.buttonDowntime;
                 this.isFF = false;
@@ -662,7 +593,7 @@
                         this.handlePlayPauseButton();
                         break;
                     case buttons.UP:
-                        this.showAndHideControls();
+                        this.controlsView.showAndHideControls();
                         break;
                     case buttons.DOWN:
                         if (this.brightcovePlayer && !this.brightcovePlayer.paused()) {
@@ -701,3 +632,4 @@
 
     exports.BrightcovePlayerView = BrightcovePlayerView;
 }(window));
+

@@ -45,6 +45,10 @@
 
         this.controlsHideTime = app.settingsParams.controlsHideTime || this.CONTROLS_HIDE_TIME;
 
+        
+        this.$playControls = null;
+        this.$playControls = null;
+
        /**
         * @function remove
         * @description remove the controls element from the app
@@ -79,8 +83,8 @@
         * @description hide title and description from Control View
         **/
         this.hideTitleAndDescription = function () {
-            this.$containerControls.find(".player-controls-content-title").hide();
-            this.$containerControls.find(".player-controls-content-subtitle").hide();
+            this.$container.find(".player-controls-content-title").hide();
+            this.$container.find(".player-controls-content-subtitle").hide();
         };
 
        /**
@@ -88,8 +92,8 @@
         * @description show title and description from Control View
         **/
         this.showTitleAndDescription = function () {
-            this.$containerControls.find(".player-controls-content-title").show();
-            this.$containerControls.find(".player-controls-content-subtitle").show();
+            this.$container.find(".player-controls-content-title").show();
+            this.$container.find(".player-controls-content-subtitle").show();
         };
 
        /**
@@ -108,8 +112,9 @@
          * @param {string} set the new description
          */
         this.updateTitleAndDescription = function(title, description) {
-            this.$containerControls.find(".player-controls-content-title").text(title);
-            this.$containerControls.find(".player-controls-content-subtitle").text(this.truncateSubtitle(description));
+            console.log('hey');
+            this.$container.find(".player-controls-content-title").text(title);
+            this.$container.find(".player-controls-content-subtitle").text(this.truncateSubtitle(description));
         }.bind(this);
 
         /**
@@ -125,20 +130,17 @@
             
             //Initializing variables
             $container.append(html);
+            this.$container = $container;
             this.$containerControls = $container.children().last();
             this.containerControls = $container.children().last()[0];
             this.playIcon = $container.find(".player-pause-button")[0];
-            this.contentImage = $container.find(".player-controls-content-image");
-            this.contentTitle = $container.find(".player-controls-content-title");
-            this.contentSubtitle = $container.find(".player-controls-content-subtitle");
-            var thumbURL = 'url('+data.thumbURL+')';
-            
+
+
             //Render metadata items
-            this.contentImage.css('background-image', thumbURL);
-            this.contentTitle.text(data.title);
-            this.contentSubtitle.text(this.truncateSubtitle(data.pubDate));
-            this.$containerControls.find(".player-controls-content-title").text(data.title);
-            this.$containerControls.find(".player-controls-content-subtitle").text(this.truncateSubtitle(data.pubDate));
+            var thumbURL = 'url('+data.thumbURL+')';
+            this.$container.find(".player-controls-content-image").css('background-image', thumbURL);
+            this.$container.find(".player-controls-content-title").text(data.title);
+            this.$container.find(".player-controls-content-subtitle").text(this.truncateSubtitle(data.pubDate));
 
             //Video specific variables
             this.seekHead = this.$containerControls.find(".player-controls-timeline-playhead")[0];
@@ -152,6 +154,9 @@
             this.$rewindIndicatorText = this.$rewindIndicator.find(".player-controls-skip-number");
             this.playerView = playerView;
             playerView.on('videoStatus', this.handleVideoStatus, this);
+
+            this.$playControls = $('.player-controls-container')[0];
+            this.$videoPlayPauseButton = $('.player-controls-play-pause-button')[0];
 
         };
 
@@ -197,6 +202,7 @@
                     break;
                 case "playing":
                     this.timeUpdateHandler(duration, currentTime);
+                    break;
                 case "resumed":
                     this.resumePressed();
                     break;
@@ -318,6 +324,7 @@
         * @description pause the currently playing video, called when app loses focus
         */
         this.pausePressed = function () {
+            this.showMetadataInfo();
             if (this.pauseTimeout) {
                 clearTimeout(this.pauseTimeout);
                 this.pauseTimeout = 0;
@@ -331,7 +338,6 @@
             }.bind(this), this.PAUSE_REMOVAL_TIME);
             // cancel any pending timeouts
             clearTimeout(this.removalTimeout);
-
         };
 
        /**
@@ -339,10 +345,10 @@
         * @description resume the currently playing video, called when app regains focus
         */
         this.resumePressed = function() {
+            this.hideMetadataInfo();
             // hide pause icon
             this.playIcon.style.opacity = "0";
             this.showAndHideControls();
-
         };
 
         /**
@@ -350,22 +356,46 @@
          * @description shows the controls and hides them after 3s, resets the timer if this function is called again.
          */
         this.showAndHideControls = function() {
-
-            /*
-            Currently the showAndHide command from the play event is handled by player-view-brightcove.js 
-            It shows a better performance to use the status information directly from the brightcove player
-            */
-
-            /*
+            //show and hide the controls after some seconds
             this.containerControls.style.opacity = "0.99";
+            $('.player-controls-play-pause-button').css('display', 'block');
+            $('.player-controls-play-pause-button').css('opacity', '0.99');
             clearTimeout(this.removalTimeout);
-            this.removalTimeout = setTimeout(function() {
-                 this.containerControls.style.opacity = "0";
-                 this.$rewindIndicator.hide();
-                 this.$forwardIndicator.hide();
-            }.bind(this), this.controlsHideTime);
-            */
+            if(!this.playerView.isAdPlaying){
+                this.removalTimeout = setTimeout(function() {
+                    this.containerControls.style.opacity = "0";
+                    this.$rewindIndicator.hide();
+                    this.$forwardIndicator.hide();
+                    this.hideMetadataInfo();
+                    $('.player-controls-play-pause-button').css('opacity', '0');
+                }.bind(this), this.controlsHideTime);
+            } else{
+                    this.containerControls.style.opacity = "0";
+                    this.$rewindIndicator.hide();
+                    this.$forwardIndicator.hide();
+                    this.hideMetadataInfo();
+                    $('.player-controls-play-pause-button').css('opacity', '0');
+            }
         };
+        this.showMetadataInfo = function() {
+            //show metadata information
+            $('.player-controls-play-pause-button').css('display', 'block');
+            $('.player-controls-play-pause-button').css('opacity', '0.99');
+            $(".player-controls-play-pause-button").css('background-image', 'url(assets/btn_player.png)');
+            $(".watermark").show();
+            $(".gradient-to-bottom").show();
+            $(".player-controls-content-image").show();
+            $(".player-controls-text").show();  
+        }
+
+        this.hideMetadataInfo = function() {
+            //hide metadata information
+            $(".player-controls-play-pause-button").css('background-image', 'url(assets/btn_pause.png)');
+            $(".watermark").hide();
+            $(".gradient-to-bottom").hide();
+            $(".player-controls-content-image").hide();
+            $(".player-controls-text").hide();
+        }
 
         /**
          * @function truncateSubtitle
