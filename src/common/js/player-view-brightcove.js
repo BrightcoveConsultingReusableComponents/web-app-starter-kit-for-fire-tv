@@ -93,12 +93,12 @@
 
             this.brightcovePlayer.on('ima3error', function() {
                 this.isAdPlaying = false;
-                this.updateTitleAndDescription(this.currentVideo.title, this.currentVideo.description);
+                this.updateTitleAndDescription(this.currentVideo.title, this.currentVideo.pubDate);
             }.bind(this));
 
             this.brightcovePlayer.on('ima3-ad-error', function() {
                 this.isAdPlaying = false;
-                this.updateTitleAndDescription(this.currentVideo.title, this.currentVideo.description);
+                this.updateTitleAndDescription(this.currentVideo.title, this.currentVideo.pubDate);
             }.bind(this));
 
             this.brightcovePlayer.on("adstart", function() {
@@ -110,7 +110,7 @@
                 this.isAdPlaying = false;
                 this.clearTimeouts();
                 this.setTimeouts();
-                this.updateTitleAndDescription(this.currentVideo.title, this.currentVideo.description);
+                this.updateTitleAndDescription(this.currentVideo.title, this.currentVideo.pubDate);
             }.bind(this));
 
         }.bind(this);

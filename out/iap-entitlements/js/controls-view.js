@@ -29,7 +29,6 @@
         this.forwardIndicator = null;
         this.playerView = null;
         this.containerControls = null;
-        this.playIcon = null;
         this.seekHead = null;
         this.totalDurationFound = null;
         this.pauseTimeout = null;
@@ -38,16 +37,18 @@
         this.previousTime = null;
         this.continuousSeek = false;
 
+        //play/pause icon
+        this.playPauseButton = null;
+        this.playingIcon = null;
+        this.pausedIcon = null;
+
         this.MAX_SKIP_TIME = 30;
         this.SKIP_INDICATOR_OFFSET = 5;
         this.PAUSE_REMOVAL_TIME = 1500;
         this.CONTROLS_HIDE_TIME = 3000;
 
-        this.controlsHideTime = app.settingsParams.controlsHideTime || this.CONTROLS_HIDE_TIME;
 
-        
-        this.$playControls = null;
-        this.$playControls = null;
+        this.controlsHideTime = app.settingsParams.controlsHideTime || this.CONTROLS_HIDE_TIME;
 
        /**
         * @function remove
@@ -111,10 +112,9 @@
          * @param {string} set the new title
          * @param {string} set the new description
          */
-        this.updateTitleAndDescription = function(title, description) {
-            console.log('hey');
+        this.updateTitleAndDescription = function(title, pubDate) {
             this.$container.find(".player-controls-content-title").text(title);
-            this.$container.find(".player-controls-content-subtitle").text(this.truncateSubtitle(description));
+            this.$container.find(".player-controls-content-subtitle").text(this.truncateSubtitle(pubDate));
         }.bind(this);
 
         /**
@@ -127,14 +127,17 @@
         this.render = function ($container, data, playerView) {
             // Build the  content template and add it
             var html = utils.buildTemplate($("#controls-view-template"), {});
-            
+
             //Initializing variables
             $container.append(html);
             this.$container = $container;
             this.$containerControls = $container.children().last();
             this.containerControls = $container.children().last()[0];
-            this.playIcon = $container.find(".player-pause-button")[0];
 
+            //play pause icon
+            this.playPauseButton = this.$container.find('.player-controls-play-pause-button')[0];
+            this.playingIcon = "url(assets/btn_player.png)";
+            this.pausedIcon = "url(assets/btn_pause.png)";
 
             //Render metadata items
             var thumbURL = 'url('+data.thumbURL+')';
@@ -154,9 +157,6 @@
             this.$rewindIndicatorText = this.$rewindIndicator.find(".player-controls-skip-number");
             this.playerView = playerView;
             playerView.on('videoStatus', this.handleVideoStatus, this);
-
-            this.$playControls = $('.player-controls-container')[0];
-            this.$videoPlayPauseButton = $('.player-controls-play-pause-button')[0];
 
         };
 
@@ -314,7 +314,6 @@
 
                     // show controls after duration found
                     this.containerControls.style.opacity = "0.99";
-                    this.playIcon.style.opacity = "0";
                     this.showAndHideControls();
             }
         }.bind(this);
@@ -330,12 +329,6 @@
                 this.pauseTimeout = 0;
             }
             this.containerControls.style.opacity = "0.99";
-            // show pause icon
-            this.playIcon.style.opacity = "0.99";
-            // hide the pause icon after designated time by ux
-            this.pauseTimeout = setTimeout(function() {
-                this.playIcon.style.opacity = "0";
-            }.bind(this), this.PAUSE_REMOVAL_TIME);
             // cancel any pending timeouts
             clearTimeout(this.removalTimeout);
         };
@@ -346,8 +339,6 @@
         */
         this.resumePressed = function() {
             this.hideMetadataInfo();
-            // hide pause icon
-            this.playIcon.style.opacity = "0";
             this.showAndHideControls();
         };
 
@@ -358,8 +349,9 @@
         this.showAndHideControls = function() {
             //show and hide the controls after some seconds
             this.containerControls.style.opacity = "0.99";
-            $('.player-controls-play-pause-button').css('display', 'block');
-            $('.player-controls-play-pause-button').css('opacity', '0.99');
+            this.playPauseButton.style.display = "block";
+            this.playPauseButton.style.opacity = "0.99"; 
+
             clearTimeout(this.removalTimeout);
             if(!this.playerView.isAdPlaying){
                 this.removalTimeout = setTimeout(function() {
@@ -367,21 +359,21 @@
                     this.$rewindIndicator.hide();
                     this.$forwardIndicator.hide();
                     this.hideMetadataInfo();
-                    $('.player-controls-play-pause-button').css('opacity', '0');
+                    this.playPauseButton.style.opacity = "0";
                 }.bind(this), this.controlsHideTime);
             } else{
                     this.containerControls.style.opacity = "0";
                     this.$rewindIndicator.hide();
                     this.$forwardIndicator.hide();
                     this.hideMetadataInfo();
-                    $('.player-controls-play-pause-button').css('opacity', '0');
+                    this.playPauseButton.style.opacity = "0";
             }
         };
         this.showMetadataInfo = function() {
             //show metadata information
-            $('.player-controls-play-pause-button').css('display', 'block');
-            $('.player-controls-play-pause-button').css('opacity', '0.99');
-            $(".player-controls-play-pause-button").css('background-image', 'url(assets/btn_player.png)');
+            this.playPauseButton.style.display = "block";
+            this.playPauseButton.style.opacity = "0.99";
+            this.playPauseButton.style.backgroundImage = this.playingIcon;
             $(".watermark").show();
             $(".gradient-to-bottom").show();
             $(".player-controls-content-image").show();
@@ -390,7 +382,7 @@
 
         this.hideMetadataInfo = function() {
             //hide metadata information
-            $(".player-controls-play-pause-button").css('background-image', 'url(assets/btn_pause.png)');
+            this.playPauseButton.style.backgroundImage = this.pausedIcon;
             $(".watermark").hide();
             $(".gradient-to-bottom").hide();
             $(".player-controls-content-image").hide();

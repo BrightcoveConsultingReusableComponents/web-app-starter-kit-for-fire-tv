@@ -84,7 +84,7 @@
         this.render = function ($el, rowData, displayButtonsParam) {
             //Make sure we don't already have a full container
             this.remove();
-            $('.right-nav').hide();
+            $('.right-view').hide();
 
             // Build the main content template and add it
             this.titleText = rowData.title;

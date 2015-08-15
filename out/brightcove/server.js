@@ -98,14 +98,11 @@ app.get('/login/logout', function(req, res) {
 
     database.once("value", function(snapshot) {
         data = snapshot.val();
-        console.log(ip);
         if(ip in data){
-            console.log('1')
             delete data[ip];
             database.set(data);
             res.send('#'+token);
         } else{  
-            console.log('2');
             res.send('#'+token); 
         }
 

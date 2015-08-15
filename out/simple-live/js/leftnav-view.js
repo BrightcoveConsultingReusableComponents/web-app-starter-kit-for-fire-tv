@@ -69,7 +69,7 @@
         this.collapse = function () {
             this.shiftNavScrollContainer(100);
             this.showOneDContainer();
-            this.rightNav.hide();
+            this.rightView.hide();
 
             //change container to the collapsed class
             this.leftNavContainerEle.classList.remove('leftnav-menulist-expanded');
@@ -143,17 +143,17 @@
                 */     
                 var view = app.currentView.constructor.name;
                 if(src && playlistTitle && view === 'LeftNavView'){
-                    $('.right-nav').show();
-                    $('#right-nav-cover-image').css("background-image", url);
-                    $('#right-nav-cover-title').text(playlistTitle);
-                    $('#right-nav-cover-details').text(playlistLength + " videos" + getLength(playlistDuration));
-                    $('#right-nav-cover-desc').text(playlistDescription);
+                    $('.right-view').show();
+                    $('#right-view-cover-image').css("background-image", url);
+                    $('#right-view-cover-title').text(playlistTitle);
+                    $('#right-view-cover-details').text(playlistLength + " videos" + getLength(playlistDuration));
+                    $('#right-view-cover-desc').text(playlistDescription);
                     
                     //change background image to a blurred version of the first playlist video
                     $('.app-background-blur').css('background-image', url);
 
                 } else{
-                    $('.right-nav').hide();
+                    $('.right-view').hide();
                 }
                 
                 //Get hours, minutes, seconds for the current video and return the best string to represent it
@@ -266,7 +266,7 @@
          * @param {integer} startIndex initial item to select
          */
         this.render = function ($el, catData, startIndex) {
-            this.rightNav = $('.right-nav');
+            this.rightView = $('.right-view');
             this.leftNavItems = catData;
             var leftNavStrings = [];
             for (var i = 0; i < catData.length; i++) {

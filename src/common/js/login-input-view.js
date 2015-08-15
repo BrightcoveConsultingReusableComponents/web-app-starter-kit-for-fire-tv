@@ -20,6 +20,7 @@
         this.loginUrl = null;
 
         this.canLogout = false;
+        this.webkitColor = null;
         
         this.render = function ($parent) {
             var html = utils.buildTemplate($("#login-input-template"), {});
@@ -27,7 +28,15 @@
             this.$el = $parent.children().eq(0);
             this.loginIcon = 'url(assets/login_icon.png)';
             this.userIcon = 'url(assets/user_icon.png)';
-            this.loginUrl = 'http://10.1.49.8:2222/login';            
+            this.loginUrl = 'http://10.1.49.8:2222/login';
+
+            //right view text
+            this.rightViewImage = $('#right-view-cover-image')[0];
+            this.rightViewTitle = $('#right-view-cover-title')[0];
+            this.rightViewDesc = $('#right-view-cover-desc')[0];
+            this.rightViewIcon = $('#right-view-cover-icon')[0];
+            this.rightViewDetails = $('#right-view-cover-details')[0];
+
         };
 
        this.select = function () {
@@ -61,11 +70,7 @@
             }
         });
 
-       }
-
-       this.renew = function(){
-        console.log('renew');
-       }
+       };
 
        this.confirmLogin = function() {
 
@@ -112,49 +117,65 @@
        }
 
        this.setLoginCover = function(flag, content) {
-        $('.right-nav').show();
-        $('#right-nav-cover-details').hide();
-        $('#right-nav-cover-icon').hide();
+        //show/hide
+        $('.right-view').show();
+        $('#right-view-cover-details').hide();
+        $('#right-view-cover-icon').hide();
+
+        //apply the style changes
         this.changeToLoginCover();
+
+        //set messages
         if(flag === 'user'){
-          $('#right-nav-cover-title').text('Welcome, '+content+'.');
-          $('#right-nav-cover-desc').text("You're now logged in!"+"\n"+"Click again to logout.");
+          this.rightViewTitle.innerHTML = 'Welcome, '+content+'.';
+          this.rightViewDesc.innerHTML = "You're now logged in!"+"\n"+"Click again to logout.";
         } else if (flag === 'token'){
-          $('#right-nav-cover-title').text(content);
-          $('#right-nav-cover-desc').text('Sign in on www.bcov.com/intern and enter the token above. Select "Sign In" again to confirm you are logged in.');
+          this.rightViewTitle.innerHTML = content;
+          this.rightViewDesc.innerHTML ='Sign in on www.bcov.com/intern and enter the token above. Select "Sign In" again to confirm you are logged in.';
         } else if (flag === 'logout'){
-          $('#right-nav-cover-title').text(content);
-          $('#right-nav-cover-desc').text('Sign in on www.bcov.com/intern and enter the token above. Select "Sign In" again to confirm you are logged in.');
+          this.rightViewTitle.innerHTML = content;
+          this.rightViewDesc.innerHTML = 'Sign in on www.bcov.com/intern and enter the token above. Select "Sign In" again to confirm you are logged in.';
         } else {
-          $('#right-nav-cover-title').text('Error');
-          $('#right-nav-cover-desc').text("Sign in is currently not available.");
+          this.rightViewTitle.innerHTML = 'Error';
+          this.rightViewDesc.innerHTML = 'Sign in is currently not available.';
         }
        }
 
        this.unsetLoginCover = function(){
+        //show/hide
+        $('.right-view').hide();
+        $('#right-view-cover-details').show();
+        $('#right-view-cover-icon').show();
+        
+        //back to normal cover
+        this.rightViewTitle.innerHTML = '';
+        this.rightViewDesc.innerHTML = '';
         this.backToNormalCover();
-        $('#right-nav-cover-details').show();
-        $('#right-nav-cover-icon').show();
-        $('#right-nav-cover-title').text('');
-        $('#right-nav-cover-desc').text('');
-        $('.right-nav').hide();
        }
 
        this.changeToLoginCover = function() {
-        $('#right-nav-cover-image').css('background-image', this.userIcon);
-        $('#right-nav-cover-image').css('-webkit-box-shadow', 'none');
-        $('#right-nav-cover-title').css('margin-left', '100px');
-        $('#right-nav-cover-desc').css('margin-left', '100px');
-        $('#right-nav-cover-image').css('width', '600px');
-        $('#right-nav-cover-image').css('height', '400px');
+        //right view image
+        this.webkitColor = this.rightViewImage.style.webkitBoxShadow;
+        this.rightViewImage.style.backgroundImage = this.userIcon;
+        this.rightViewImage.style.webkitBoxShadow = 'none';
+        this.rightViewImage.style.marginLeft = '-150px';
+        this.rightViewImage.style.width = '600px';
+        this.rightViewImage.style.height = '400px';
+        //right view title and description
+        this.rightViewTitle.style.marginLeft = '-40px';
+        this.rightViewDesc.style.marginLeft = '-40px';
        }
 
        this.backToNormalCover = function() {
-        $('#right-nav-cover-image').css('-webkit-box-shadow', '0px 0px 10px 10px rgba(223,115,183, 0.5)');
-        $('#right-nav-cover-title').css('margin-left', '0px');
-        $('#right-nav-cover-desc').css('margin-left', '0px');
-        $('#right-nav-cover-image').css('width', '750px');
-        $('#right-nav-cover-image').css('height', '450px');
+        //right view image
+        this.rightViewImage.style.backgroundImage = 'none';
+        this.rightViewImage.style.webkitBoxShadow = this.webkitColor;
+        this.rightViewImage.style.marginLeft = '0px';
+        this.rightViewImage.style.width = '750px';
+        this.rightViewImage.style.height = '450px';
+        //right view title and description
+        this.rightViewTitle.style.marginLeft = '0px';
+        this.rightViewDesc.style.marginLeft = '0px';
        }
 
     }

@@ -63,7 +63,7 @@ div {
   height: 100%;
   opacity: 0.4;
   background-size: 100% 100%;
-  -webkit-filter: blur(20px);
+  -webkit-filter: blur(40px);
   -webkit-transform: translate3d(0, 0, 0); }
 
 .app-main-container {
@@ -89,13 +89,13 @@ div {
     width: 100%;
     height: 100%; }
 
-.right-nav {
+.right-view {
   position: absolute;
   top: 225px;
   left: 950px;
   display: none; }
 
-#right-nav-cover-image {
+#right-view-cover-image {
   width: 750px;
   height: 450px;
   background-image: none;
@@ -103,7 +103,7 @@ div {
   -webkit-box-shadow: 0px 0px 10px 10px rgba(223, 115, 183, 0.5);
   border: none; }
 
-#right-nav-cover-title {
+#right-view-cover-title {
   color: #e8e8e8;
   line-height: 1.4;
   color: rgba(223, 115, 183, 0.6);
@@ -115,12 +115,12 @@ div {
   width: 75%;
   margin-top: 10px; }
 
-#right-nav-cover-details {
+#right-view-cover-details {
   font-weight: 200;
   font-size: 1.3em;
   color: #b9bbbd; }
 
-#right-nav-cover-desc {
+#right-view-cover-desc {
   color: #e8e8e8;
   font-size: 1.2em;
   width: 80%;
@@ -142,16 +142,15 @@ div {
   -moz-box-orient: vertical;
   box-orient: vertical; }
 
-#right-nav-cover-icon {
+#right-view-cover-icon {
   position: absolute;
   top: 380px;
   left: 655px;
   width: 95px;
   height: 70px;
   opacity: 1.0;
-  background-image: url("assets/playlist_icon2.png");
-  background-size: 100% 100%;
-  background-color: rgba(255, 255, 255, 0.5); }
+  background-image: url("assets/playlist_icon.png");
+  background-size: 100% 100%; }
 
 .leftnav-main-container {
   position: absolute;
@@ -590,7 +589,7 @@ div {
   width: 50px;
   margin-top: 20px;
   z-index: 40000;
-  background-image: url("assets/btn_player.png");
+  background-image: url("assets/btn_pause.png");
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;

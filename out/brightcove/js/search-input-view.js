@@ -28,6 +28,11 @@
             this.$el.on("change", this.searchQueryEntered);
             this.$el.on("keyup", this.enterButtonPressed);
             this.$el.on("keyup", this.changeToSearchView);
+
+            this.searchIcon = 'url(assets/search_icon.png)';
+            this.leftNav = $('#left-nav')[0];
+            this.loginBox = $('.leftnav-login-box')[0];
+            this.scrollingList = $('.leftnav-menu-scrolling-list')[0];
         };
 
         this.enterButtonPressed = function(e){
@@ -46,13 +51,14 @@
             //change for search view
             if(!e || e.target.value){
               this.isOnSearchMode = true;
-              $('#left-nav').css('width', '110%');
-              $('#left-nav').css('height', '22%');
-              $('#left-nav').css('top', '-75px');
-              $('#left-nav').css('left', '120px');
-              $('.leftnav-login-box').css('visibility', 'hidden');
-              $('.leftnav-menu-scrolling-list').css('padding-top', '0px');
               $('#app-header-bar').hide();
+
+              this.leftNav.style.width = '110%';
+              this.leftNav.style.height = '22%';
+              this.leftNav.style.top = '-75px';
+              this.leftNav.style.left = '120px';
+              this.loginBox.style.visibility = 'hidden';
+              this.scrollingList.style.paddingTop = '0px';
             }
        }.bind(this);
 
@@ -60,17 +66,18 @@
             this.isOnSearchMode = false;
             //normal position of search
             $('#app-header-bar').show();
-            $('#left-nav').css('width', '840px');
-            $('#left-nav').css('height', '1080px');
-            $('#left-nav').css('top', 0);
-            $('#left-nav').css('left', 0);
-            $('.leftnav-login-box').css('visibility', 'visible');
-            $('.leftnav-menu-scrolling-list').css('padding-top', '70px');
+            
+            this.leftNav.style.width = '840px';
+            this.leftNav.style.height = '1080px';
+            this.leftNav.style.top = '0';
+            this.leftNav.style.left = '0';
+            this.loginBox.style.visibility = 'visible';
+            this.scrollingList.style.paddingTop = '70px';
        }
 
        this.select = function () {
             $('#search-input').css('background-image', 'url(assets/search_icon.png)');
-            $('.right-nav').hide();
+            $('.right-view').hide();
             this.$el.focus();
        }.bind(this);
 
@@ -82,7 +89,7 @@
        this.deselect = function (index) {
             if(index){
               if(index>1){
-                $('.right-nav').show();
+                $('.right-view').show();
                 $('#one-d-no-items').hide();
               }
             }

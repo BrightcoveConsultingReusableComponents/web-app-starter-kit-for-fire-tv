@@ -211,60 +211,60 @@
                 this.searchInputView = new SearchInputView();
                 this.loginInputView = new LoginInputView();
             }
-            
-            //Call back to change the right-center image cover for each of the playlists
-            var changePlaylistImgCover = function(categoryData) {
-                //get playlistInfo
-                var playlistInfo = categoryData[0].playlistInfo;
-                //getting the variables to the playlist cover image/description
-                var firstKey = Object.keys(categoryData)[0];
-                var src = categoryData[firstKey].imgURL;
-                var title = categoryData[firstKey].title;
-                var url = "url('"+src+"')";
-                var playlistTitle = playlistInfo.title.trim();
-                var playlistDescription = playlistInfo.description
-                var playlistLength = categoryData.length;
-                
-                var playlistDuration = 0;
-                for(var i=0; i<playlistLength; i++){
-                    playlistDuration += Math.floor(categoryData[i].length/1000);
-                }
-
-                //image, title and extra information about the playlist
-                $('#right-nav-cover-image').css("background-image", url);
-                $('#right-nav-cover-title').text(playlistTitle);
-                $('#right-nav-cover-details').text(playlistLength + " videos" + getLength(playlistDuration));
-                $('#right-nav-cover-desc').text(playlistDescription);
-                
-                //change background image to a blurred version of the first playlist video
-                $('.app-background-blur').css('background-image', url);
-
-                //auxiliar function to get hours and minutes from video length in seconds
-                function getLength(seconds) {
-                    var hours = Math.floor( seconds / 3600 );
-                    var minutes = Math.floor( seconds / 60 ) % 60;
-                    seconds = Math.floor( seconds % 60 );
-
-                    if(hours && minutes){
-                        return ", "+hours+"h"+minutes+"min";
-                    } else if(hours) {
-                        return ", "+hours+"h";
-                    } else if(minutes){
-                        return ", "+minutes+"min";
-                    } else if(seconds) {
-                        return ", "+seconds+"s";
-                    } else{
-                        return "";
-                    }
-                };
-
-            }
 
             /**
             * Event Handler - Change the cover image when one of the items is chosen
             * @param {none}
             */
             leftNavView.on('changeCover', function() {
+                //Call back to change the right-center image cover for each of the playlists
+                var changePlaylistImgCover = function(categoryData) {
+                    //get playlist info
+                    var playlistInfo = categoryData[0].playlistInfo;
+
+                    //getting the variables for the playlist cover image/description
+                    var firstKey = Object.keys(categoryData)[0];
+                    var src = categoryData[firstKey].imgURL;
+                    var title = categoryData[firstKey].title;
+                    var url = "url('"+src+"')";
+                    var playlistTitle = playlistInfo.title.trim();
+                    var playlistDescription = playlistInfo.description
+                    var playlistLength = categoryData.length;
+                    
+                    var playlistDuration = 0;
+                    for(var i=0; i<playlistLength; i++){
+                        playlistDuration += Math.floor(categoryData[i].length/1000);
+                    }
+
+                    //change image, title and extra information about the playlist on the right nav
+                    $('#right-view-cover-image').css("background-image", url);
+                    $('#right-view-cover-title').text(playlistTitle);
+                    $('#right-view-cover-details').text(playlistLength + " videos" + getLength(playlistDuration));
+                    $('#right-view-cover-desc').text(playlistDescription);
+                    
+                    //change background image to a blurred version of the first playlist video
+                    $('.app-background-blur').css('background-image', url);
+
+                    //auxiliar function to get hours and minutes from video length in seconds
+                    function getLength(seconds) {
+                        var hours = Math.floor( seconds / 3600 );
+                        var minutes = Math.floor( seconds / 60 ) % 60;
+                        seconds = Math.floor( seconds % 60 );
+
+                        if(hours && minutes){
+                            return ", "+hours+"h"+minutes+"min";
+                        } else if(hours) {
+                            return ", "+hours+"h";
+                        } else if(minutes){
+                            return ", "+minutes+"min";
+                        } else if(seconds) {
+                            return ", "+seconds+"s";
+                        } else{
+                            return "";
+                        }
+                    };
+                }
+
                 if(this.leftNavView.currSelectedIndex>1){
                     app.data.getCategoryData(changePlaylistImgCover);
                 }
@@ -343,7 +343,7 @@
             */
             leftNavView.on('exit', function() {
                 this.leftNavView.collapse();
-                this.transitionToLeftNavView();
+                this.transitionToExpandedLeftNavView();
             }, this);
 
             if (this.showSearch) {
@@ -450,7 +450,7 @@
             oneDView.on('noContent', function() {
                 window.setTimeout(function(){
                     this.loadingSpinner.hide.spinner();
-                    this.transitionToLeftNavView();
+                    this.transitionToExpandedLeftNavView();
                     this.leftNavView.setHighlightedElement();
                 }.bind(this), 10);
             }, this);
@@ -474,7 +474,7 @@
                 else { 
                     if(dir){
                         if(!this.oneDView.hadShrunk){
-                            this.transitionToLeftNavView();
+                            this.transitionToExpandedLeftNavView();
                         } else {
                             this.oneDView.expandShoveler();
                             this.oneDView.hideTextDetails();
@@ -488,13 +488,13 @@
                                 this.oneDView.scrollTextDetails(-10);
                             }
                         } else{
-                            this.transitionToLeftNavView();
+                            this.transitionToExpandedLeftNavView();
                             /*
                             //turn to expanded search mode
                             this.searchInputView.select();
                             this.leftNavView.currSelectedIndex = 1;
                             this.leftNavView.selectLeftNavItem();
-                            this.transitionToLeftNavView();
+                            this.transitionToExpandedLeftNavView();
                             this.searchInputView.changeToSearchView();
                             this.searchInputView.searchFromShoveler = true;*/
                         }
@@ -690,15 +690,6 @@
  * Application Transition Methods
  *
  ***********************************/
-       /**
-        * Set the UI appropriately for the left-nav view
-        */
-        this.transitionToLeftNavView = function() {
-            this.selectView(this.leftNavView);
-            this.leftNavView.expand();
-            //change size of selected shoveler item 
-            this.oneDView.shrinkShoveler();
-        };
 
        /**
         * Set the UI appropriately for the entitlement view
