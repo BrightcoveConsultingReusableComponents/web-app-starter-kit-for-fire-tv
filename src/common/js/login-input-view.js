@@ -56,7 +56,7 @@
             type: 'GET', 
             contentType: 'application/json', 
           error: function(error) {
-            console.log("Error - AJAX");
+            self.setLoginCover('error', null);
           }
         });
           submit.success(function (data) {
