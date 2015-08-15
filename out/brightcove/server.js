@@ -34,7 +34,8 @@ app.get('/login', function(req, res) {
     ip = ip.replace(/f|:/gi, '');
     ip = ip.replace(/\./g, '-');
     var token = generateToken();
-
+    
+    //Another account should be setup for this. All the data is on the database.json on this repo
     var database = new Firebase('https://intense-heat-5166.firebaseio.com/webfireTV/');
     var data = {}
     database.once("value", function(snapshot) {
